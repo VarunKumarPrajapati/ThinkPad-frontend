@@ -39,6 +39,7 @@ function Navbar() {
         {/* Logo and Icon only for Desktop */}
         <div className="items-center hidden pr-7 md:flex">
           <GIcon
+            clickable
             icon="menu"
             onClick={() => setIsSidebarExpanded((prevValue) => !prevValue)}
           />
@@ -57,6 +58,7 @@ function Navbar() {
 
               {/* Menu Icon Only for Mobile  */}
               <GIcon
+                clickable
                 icon="menu"
                 onClick={() => setIsSidebarExpanded((prevValue) => !prevValue)}
                 className={"md:hidden"}
@@ -71,6 +73,7 @@ function Navbar() {
               </div>
 
               <GIcon
+                clickable
                 icon={isLayoutGrid ? "grid_view" : "view_agenda"}
                 outline
                 onClick={handleLayout}
@@ -78,20 +81,31 @@ function Navbar() {
               />
 
               <div className="hidden md:inline-block">
-                <GIcon icon="close" className="p-2 mx-2.5" type="reset" />
+                <GIcon
+                  clickable
+                  icon="close"
+                  className="p-2 mx-2.5"
+                  type="reset"
+                />
               </div>
             </form>
           </div>
 
           <div className="hidden md:flex">
-            <GIcon icon="refresh" className=" hover:text-black" />
+            <GIcon clickable icon="refresh" className=" hover:text-black" />
             <GIcon
+              clickable
               icon={isLayoutGrid ? "grid_view" : "view_agenda"}
               outline
               className="hover:text-black"
               onClick={handleLayout}
             />
-            <GIcon icon="settings" className="hover:text-black" outline />
+            <GIcon
+              clickable
+              icon="settings"
+              className="hover:text-black"
+              outline
+            />
           </div>
         </div>
 

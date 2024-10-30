@@ -1,13 +1,13 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-function GIcon({ children, icon, className, outline, ...rest }) {
+function GIcon({ children, icon, className, outline, clickable, ...rest }) {
   return (
     <button
       className={twMerge(
         outline ? "material-symbols-outlined" : "material-icons",
-        "rounded-full p-3 mx-1 hover:bg-gray-200",
         "text-icon-color",
+        clickable && "p-3 mx-1 hover:bg-gray-200 rounded-full",
         className
       )}
       {...rest}

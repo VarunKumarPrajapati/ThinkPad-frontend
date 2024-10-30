@@ -18,6 +18,7 @@ function DesktopSidebarItem({ tab, active, setActive, className }) {
       )}
     >
       <GIcon
+        clickable
         className={twMerge(
           "hover:bg-active-icon-color",
           active === tab.icon && "bg-active-icon-color text-black"

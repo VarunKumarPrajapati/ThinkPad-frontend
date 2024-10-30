@@ -5,11 +5,11 @@ function Logo({ className }) {
   return (
     <div
       className={twMerge(
-        "cursor-pointer select-none !font-poppins group w-[145px]",
+        "cursor-pointer select-none !font-poppins group w-[145px] text-xl font-bold",
         className
       )}
     >
-      <h1 className="flex items-baseline justify-center text-xl font-bold text-nowrap">
+      <h1 className="flex items-baseline justify-center text-nowrap">
         <span className="text-orange-600">Think</span>
         <span className="text-black transition-all duration-200 material-symbols-outlined group-hover:text-3xl group-hover:text-yellow-300">
           emoji_objects

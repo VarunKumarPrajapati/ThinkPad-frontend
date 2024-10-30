@@ -6,7 +6,6 @@ import usePropsContext from "../hooks/use-propsContext";
 function MobileSidebarItem({ className, tab, setActive }) {
   const { setIsSidebarExpanded } = usePropsContext();
   const handleClick = () => {
-    console.log(tab);
     setActive(tab.icon);
     setIsSidebarExpanded(false);
   };
@@ -20,7 +19,9 @@ function MobileSidebarItem({ className, tab, setActive }) {
         className
       )}
     >
-      <GIcon outline>{tab.icon}</GIcon>
+      <GIcon clickable outline>
+        {tab.icon}
+      </GIcon>
       <h4 className="text-sm">{tab.name}</h4>
     </div>
   );

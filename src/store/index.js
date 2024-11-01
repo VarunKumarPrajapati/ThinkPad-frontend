@@ -13,4 +13,4 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { useSignUpMutation } from "./apis/userApi";
+export { useSignUpMutation, useLoginMutation } from "./apis/userApi";

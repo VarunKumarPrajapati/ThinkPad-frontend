@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Input from "../components/common/Input";
@@ -8,8 +8,12 @@ import Button from "../components/common/Button";
 
 import { loginDataValidation } from "../utils/userValidationSchema";
 
+import { useLoginMutation } from "../store";
+
 function LoginPage() {
+  const navigate = useNavigate();
   const [data, setData] = useState({ email: "", password: "" });
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,24 +24,37 @@ function LoginPage() {
     e.preventDefault();
 
     const { validData, error } = await loginDataValidation(data);
-    if (error)
-      return toast.error(error, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+    if (error) return toast.error(error);
 
-    console.log(validData);
+    login(validData)
+      .unwrap()
+      .then(() => {
+        toast.success("Successfully Logged In.");
+        toast.info("Redirecting...");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      })
+      .catch((err) => {
+        toast.error(err.data.message);
+      });
   };
 
   return (
     <main className="flex items-center justify-center w-screen h-screen !font-poppins bg-gray-200">
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
       <div className="flex flex-col justify-start w-full h-full text-black bg-white shadow-lg md:flex-row gap-x-24 gap-y-6">
         <div>
           <img
@@ -75,7 +92,9 @@ function LoginPage() {
               className="px-3 py-2 bg-gray-200 rounded-md"
               placeholder="Password"
             />
-            <Button className="w-full mt-3">Login</Button>
+            <Button loading={isLoading} className="w-full mt-3">
+              Login
+            </Button>
           </form>
         </div>
       </div>

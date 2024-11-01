@@ -9,9 +9,9 @@ async function signUpDataValidation(data) {
 
   try {
     const validData = await schema.validate(data);
-    return { validData };
+    return { validData, error: null };
   } catch (error) {
-    return { error: error.message };
+    return { validData: null, error: error.message };
   }
 }
 
@@ -23,9 +23,9 @@ async function loginDataValidation(data) {
 
   try {
     const validData = await schema.validate(data);
-    return { validData };
+    return { validData, error: null };
   } catch (error) {
-    return { error: error.message };
+    return { validData: null, error: error.message };
   }
 }
 

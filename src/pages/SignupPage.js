@@ -33,7 +33,7 @@ function SignupPage() {
         toast.info("Redirecting...");
         setTimeout(() => navigate("/login"), 3000);
       })
-      .catch((err) => toast.error(err.data?.errorMessage));
+      .catch((err) => toast.error(err.data?.message));
   };
 
   return (

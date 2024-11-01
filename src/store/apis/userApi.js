@@ -22,9 +22,27 @@ const userApi = createApi({
           body: data,
         }),
       }),
+
+      fetchUser: builder.query({
+        providesTags: ["USER"],
+        query: () => ({
+          url: "/me",
+          method: "GET",
+        }),
+      }),
+
+      updateUser: builder.mutation({
+        invalidatesTags: ["USER"],
+        query: (data) => ({ url: "update/me", method: "PATCH", body: data }),
+      }),
     };
   },
 });
 
-export const { useSignUpMutation, useLoginMutation } = userApi;
+export const {
+  useFetchUserQuery,
+  useLoginMutation,
+  useSignUpMutation,
+  useUpdateUserMutation,
+} = userApi;
 export { userApi };

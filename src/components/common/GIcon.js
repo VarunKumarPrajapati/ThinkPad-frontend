@@ -6,7 +6,7 @@ function GIcon({ children, icon, className, outline, clickable, ...rest }) {
     <button
       className={twMerge(
         outline ? "material-symbols-outlined" : "material-icons",
-        "text-icon-color",
+        "text-icon-color select-none",
         clickable && "p-3 mx-1 hover:bg-gray-200 rounded-full",
         className
       )}

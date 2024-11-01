@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         "icon-color": "rgb(95,99,104)",
         "active-icon-color": "rgb(254,239,195)",
+        "transparent-1": "rgba(0,0,0,0.4)",
       },
       fontFamily: {
         "material-icons": "Material Icons",

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+
 import Logo from "./common/Logo";
 import Input from "./common/Input";
 import GIcon from "./common/GIcon";
-import ProfileToggle from "./ProfileToggle";
 import Avatar from "./common/Avatar";
+import ProfileToggle from "./ProfileToggle";
 
 import usePropsContext from "../hooks/use-propsContext";
 
-function Navbar() {
+function Navbar({ user }) {
   const {
     setIsSidebarExpanded,
     isLayoutGrid,
@@ -15,11 +16,6 @@ function Navbar() {
   } = usePropsContext();
 
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const user = {
-    email: "varunkumarprajapati57@gmail.com",
-    username: "Varun Kumar Prajapati",
-    avatar: "luffy",
-  };
 
   const handleLayout = () => {
     setIsLayoutGrid((prevValue) => !prevValue);
@@ -35,7 +31,7 @@ function Navbar() {
 
   return (
     <header className="fixed top-0 w-full bg-white h-fit ">
-      <div className="relative flex items-center px-3 py-2 md:border-b md:p-2 justify-evenly">
+      <div className="flex items-center px-3 py-2 md:border-b md:p-2 justify-evenly">
         {/* Logo and Icon only for Desktop */}
         <div className="items-center hidden pr-7 md:flex">
           <GIcon
@@ -109,13 +105,18 @@ function Navbar() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center pl-2 md:pr-1 md:pl-8">
+        <div className="flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">
           <button onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <Avatar currentAvatar={user.avatar} className="w-12 " />
+            <Avatar currentAvatar={user?.avatar} className="w-14" />
           </button>
-
-          {isToggleOpen && <ProfileToggle className="mt-16 mr-2" user={user} />}
         </div>
+        {isToggleOpen && (
+          <ProfileToggle
+            className="mt-16 mr-2"
+            user={user}
+            closeToggle={() => setIsToggleOpen(!isToggleOpen)}
+          />
+        )}
       </div>
     </header>
   );

@@ -3,11 +3,11 @@ import { twMerge } from "tailwind-merge";
 
 function Avatar({ currentAvatar, className, ...rest }) {
   const avatar = {
-    none: "/img/user.jpg",
-    luffy: "/img/luffy.png",
-    brook: "/img/brook.png",
-    sanchi: "/img/sanchi.png",
-    zoro: "/img/zoro.png",
+    none: "/img/user.webp",
+    luffy: "/img/luffy.webp",
+    brook: "/img/brook.webp",
+    sanchi: "/img/sanchi.webp",
+    zoro: "/img/zoro.webp",
   };
   return (
     <img

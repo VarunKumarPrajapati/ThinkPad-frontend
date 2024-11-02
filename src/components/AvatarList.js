@@ -12,11 +12,11 @@ function AvatarList() {
   const [selectedAvatar, setSelectedAvatar] = useState(data.avatar);
 
   const avatarList = [
-    { name: "luffy", url: "/img/luffy.png" },
-    { name: "zoro", url: "/img/zoro.png" },
-    { name: "sanchi", url: "/img/sanchi.png" },
-    { name: "brook", url: "/img/brook.png" },
-    { name: "none", url: "/img/user.jpg" },
+    { name: "luffy", url: "/img/luffy.webp" },
+    { name: "zoro", url: "/img/zoro.webp" },
+    { name: "sanchi", url: "/img/sanchi.webp" },
+    { name: "brook", url: "/img/brook.webp" },
+    { name: "none", url: "/img/user.webp" },
   ];
 
   const renderAvatarList = avatarList.map((avatar, key) => {

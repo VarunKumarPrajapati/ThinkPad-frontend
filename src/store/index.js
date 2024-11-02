@@ -16,6 +16,7 @@ setupListeners(store.dispatch);
 export {
   useFetchUserQuery,
   useLoginMutation,
+  useLogoutMutation,
   useSignUpMutation,
   useUpdateUserMutation,
 } from "./apis/userApi";

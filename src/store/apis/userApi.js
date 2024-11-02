@@ -29,11 +29,19 @@ const userApi = createApi({
           url: "/me",
           method: "GET",
         }),
+        keepUnusedDataFor: 0,
       }),
 
       updateUser: builder.mutation({
         invalidatesTags: ["USER"],
         query: (data) => ({ url: "update/me", method: "PATCH", body: data }),
+      }),
+
+      logout: builder.mutation({
+        query: () => ({
+          url: "/logout",
+          method: "GET",
+        }),
       }),
     };
   },
@@ -42,6 +50,7 @@ const userApi = createApi({
 export const {
   useFetchUserQuery,
   useLoginMutation,
+  useLogoutMutation,
   useSignUpMutation,
   useUpdateUserMutation,
 } = userApi;

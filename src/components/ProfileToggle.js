@@ -1,13 +1,24 @@
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { useNavigate } from "react-router-dom";
 
 import GIcon from "./common/GIcon";
 import Avatar from "./common/Avatar";
 import UpdateProfile from "./UpdateProfile";
 
+import { useLogoutMutation } from "../store";
+
 function ProfileToggle({ className, user, closeToggle }) {
+  const navigate = useNavigate();
   const { email, username, avatar } = user;
   const [isEdit, setIsEdit] = useState(false);
+  const [logout] = useLogoutMutation();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <div
       className={twMerge(
@@ -28,6 +39,12 @@ function ProfileToggle({ className, user, closeToggle }) {
           clickable
           className="!text-xl p-1 bg-gray-200 hover:bg-gray-50"
           onClick={closeToggle}
+        />
+        <GIcon
+          icon="logout"
+          clickable
+          className="!text-xl p-1 bg-gray-200 hover:bg-gray-50"
+          onClick={handleLogout}
         />
       </div>
 

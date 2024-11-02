@@ -8,11 +8,13 @@ import { useFetchUserQuery } from "../store";
 
 function MainPage() {
   const navigate = useNavigate();
-  const { data, isError, error } = useFetchUserQuery();
+  const { data, error } = useFetchUserQuery();
 
   useEffect(() => {
-    if (isError && error.status === 401) navigate("/login");
-  }, [data, navigate, error, isError]);
+    if (error?.status === 401) {
+      navigate("/login");
+    }
+  }, [data, navigate, error]);
 
   return (
     <div className="w-screen h-screen overflow-hidden font-roboto">

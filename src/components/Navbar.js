@@ -7,6 +7,7 @@ import Avatar from "./common/Avatar";
 import ProfileToggle from "./ProfileToggle";
 
 import usePropsContext from "../hooks/use-propsContext";
+import { twMerge } from "tailwind-merge";
 
 function Navbar({ user }) {
   const {
@@ -16,6 +17,7 @@ function Navbar({ user }) {
   } = usePropsContext();
 
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const [isSearchBarFocused, setSearchBarFocused] = useState(false);
 
   const handleLayout = () => {
     setIsLayoutGrid((prevValue) => !prevValue);
@@ -27,6 +29,14 @@ function Navbar({ user }) {
 
   const handleChange = (e) => {
     console.log(e.target.value);
+  };
+
+  const handleFocusSearchBar = (e) => {
+    setSearchBarFocused(true);
+  };
+
+  const handleBlurSearchBar = (e) => {
+    setSearchBarFocused(false);
   };
 
   return (
@@ -46,7 +56,10 @@ function Navbar({ user }) {
           <div className="w-full md:pl-3 md:pr-8">
             <form
               onSubmit={handleSubmit}
-              className="flex items-center max-w-[720px] bg-gray-100 md:rounded-lg rounded-full w-full "
+              className={twMerge(
+                "flex items-center max-w-[720px] bg-gray-100 md:rounded-lg rounded-full w-full",
+                isSearchBarFocused && "bg-white shadow-md"
+              )}
             >
               <div className="hidden md:inline-block">
                 <GIcon icon="search" className="p-2 mx-2.5" />
@@ -62,6 +75,8 @@ function Navbar({ user }) {
 
               <div className="w-full">
                 <Input
+                  onFocus={handleFocusSearchBar}
+                  onBlur={handleBlurSearchBar}
                   placeholder="Search"
                   className="py-3"
                   onChange={handleChange}

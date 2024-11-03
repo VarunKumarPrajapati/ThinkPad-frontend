@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+
 import AvatarList from "./AvatarList";
+import Loading from "./common/Loading";
+
 import { useFetchUserQuery, useUpdateUserMutation } from "../store";
 
 function UpdateProfile() {
   const { data } = useFetchUserQuery();
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
   const [username, setUsername] = useState(data?.username);
 
   const handleChange = (e) => {
@@ -34,12 +37,16 @@ function UpdateProfile() {
           className="w-full px-2 py-1 focus:outline-none"
         />
 
-        <button
-          type="submit"
-          className="flex items-center justify-center text-black rounded-md hover:text-white hover:bg-blue-600"
-        >
-          <span className="w-full material-symbols-outlined">check</span>
-        </button>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <button
+            type="submit"
+            className="flex items-center justify-center text-black rounded-md hover:text-white hover:bg-blue-600"
+          >
+            <span className="w-full material-symbols-outlined">check</span>
+          </button>
+        )}
       </form>
     </>
   );

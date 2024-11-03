@@ -8,14 +8,15 @@ import ProfileToggle from "./ProfileToggle";
 
 import usePropsContext from "../hooks/use-propsContext";
 import { twMerge } from "tailwind-merge";
+import { useFetchUserQuery } from "../store";
 
-function Navbar({ user }) {
+function Navbar() {
   const {
     setIsSidebarExpanded,
     isLayoutGrid,
     setIsLayoutGrid,
   } = usePropsContext();
-
+  const { data: user, isLoading } = useFetchUserQuery();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isSearchBarFocused, setSearchBarFocused] = useState(false);
 
@@ -122,7 +123,11 @@ function Navbar({ user }) {
 
         <div className="flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">
           <button onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <Avatar currentAvatar={user?.avatar} className="w-14" />
+            <Avatar
+              loading={isLoading}
+              currentAvatar={user?.avatar}
+              className="size-12"
+            />
           </button>
         </div>
         {isToggleOpen && (

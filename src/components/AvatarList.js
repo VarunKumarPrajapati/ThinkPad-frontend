@@ -7,7 +7,7 @@ import { useFetchUserQuery, useUpdateUserMutation } from "../store";
 
 function AvatarList() {
   const { data } = useFetchUserQuery();
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const [selectedAvatar, setSelectedAvatar] = useState(data.avatar);
 
@@ -28,6 +28,7 @@ function AvatarList() {
       <AvatarListItem
         key={key}
         avatar={avatar}
+        loading={isLoading}
         selectedAvatar={selectedAvatar}
         setSelectedAvatar={setSelectedAvatar}
         className={classes}

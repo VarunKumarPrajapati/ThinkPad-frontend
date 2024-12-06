@@ -3,14 +3,16 @@ import { createContext, useState } from "react";
 const propsContext = createContext();
 
 function PropsProvider({ children }) {
+  const [isMobile, setIsMobile] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [isLayoutGrid, setIsLayoutGrid] = useState(true);
-
   const props = {
-    isSidebarExpanded,
-    setIsSidebarExpanded,
+    isMobile,
+    setIsMobile,
     isLayoutGrid,
+    isSidebarExpanded,
     setIsLayoutGrid,
+    setIsSidebarExpanded,
   };
 
   return (

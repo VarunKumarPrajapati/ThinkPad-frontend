@@ -32,7 +32,10 @@ function AvatarList() {
         selectedAvatar={selectedAvatar}
         setSelectedAvatar={setSelectedAvatar}
         className={classes}
-        onClick={() => updateUser({ avatar: avatar.name })}
+        onClick={() => {
+          console.log("Clicked");
+          updateUser({ avatar: avatar.name });
+        }}
       />
     );
   });

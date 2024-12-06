@@ -1,17 +1,17 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-function Icon({ className, icon: Icon, size = 24 }) {
+export default function Icon({ className, icon: Icon, size = 24, ...rest }) {
   return (
     <button
       className={twMerge(
-        "p-3 rounded-full cursor-pointer hover:bg-slate-100 flex justify-center items-center",
+        "flex justify-center items-center",
+        "p-3 rounded-full transition-colors duration-150 hover:text-black hover:bg-[rgba(95,99,104,0.157)]",
         className
       )}
+      {...rest}
     >
       <Icon size={size} />
     </button>
   );
 }
-
-export default Icon;

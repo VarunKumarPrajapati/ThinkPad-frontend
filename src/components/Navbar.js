@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Logo from "./common/Logo";
 import Input from "./common/Input";
@@ -11,6 +11,8 @@ import { twMerge } from "tailwind-merge";
 import { useFetchUserQuery } from "../store";
 
 function Navbar() {
+  const toggleButton = useRef(null);
+
   const {
     setIsSidebarExpanded,
     isLayoutGrid,
@@ -122,7 +124,10 @@ function Navbar() {
         </div>
 
         <div className="flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">
-          <button onClick={() => setIsToggleOpen(!isToggleOpen)}>
+          <button
+            ref={toggleButton}
+            onClick={() => setIsToggleOpen(!isToggleOpen)}
+          >
             <Avatar
               loading={isLoading}
               currentAvatar={user?.avatar}
@@ -132,6 +137,7 @@ function Navbar() {
         </div>
         {isToggleOpen && (
           <ProfileToggle
+            ref={toggleButton}
             className="mt-16 mr-2"
             user={user}
             closeToggle={() => setIsToggleOpen(!isToggleOpen)}

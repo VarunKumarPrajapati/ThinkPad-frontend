@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, forwardRef, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useNavigate } from "react-router-dom";
 
@@ -8,8 +8,9 @@ import UpdateProfile from "./UpdateProfile";
 
 import { useLogoutMutation } from "../store";
 
-function ProfileToggle({ className, user, closeToggle }) {
+const ProfileToggle = forwardRef(({ className, user, closeToggle }, ref) => {
   const navigate = useNavigate();
+  const toggle = useRef(null);
   const { email, username, avatar } = user;
   const [isEdit, setIsEdit] = useState(false);
   const [logout] = useLogoutMutation();
@@ -19,8 +20,27 @@ function ProfileToggle({ className, user, closeToggle }) {
     navigate("/login");
   };
 
+  useEffect(() => {
+    const handleCloseToggle = (e) => {
+      if (
+        toggle.current &&
+        !toggle.current.contains(e.target) &&
+        !ref.current.contains(e.target)
+      ) {
+        closeToggle();
+      }
+    };
+
+    document.addEventListener("click", handleCloseToggle);
+
+    return () => {
+      document.removeEventListener("click", handleCloseToggle);
+    };
+  }, [closeToggle, ref]);
+
   return (
     <div
+      ref={toggle}
       className={twMerge(
         "absolute top-2.5 right-0 z-50 font-poppins rounded-xl shadow-lg border flex flex-col gap-y-2 w-80 bg-gray-100 p-2",
         className
@@ -59,6 +79,5 @@ function ProfileToggle({ className, user, closeToggle }) {
       {isEdit && <UpdateProfile />}
     </div>
   );
-}
-
+});
 export default ProfileToggle;

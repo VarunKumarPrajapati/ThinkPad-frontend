@@ -22,7 +22,7 @@ function ProfileToggle({ className, user, closeToggle }) {
   return (
     <div
       className={twMerge(
-        "absolute top-2.5 right-0 z-10 font-poppins rounded-xl shadow-lg border flex flex-col gap-y-2 w-80 bg-gray-100 p-2",
+        "absolute top-2.5 right-0 z-50 font-poppins rounded-xl shadow-lg border flex flex-col gap-y-2 w-80 bg-gray-100 p-2",
         className
       )}
     >

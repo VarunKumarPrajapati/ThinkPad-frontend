@@ -41,7 +41,7 @@ function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 w-full bg-white h-fit ">
+    <header className="absolute top-0 w-full bg-white h-fit">
       <div className="flex items-center px-3 py-2 md:border-b md:p-2 justify-evenly">
         {/* Logo and Icon only for Desktop */}
         <div className="items-center hidden pr-7 md:flex">

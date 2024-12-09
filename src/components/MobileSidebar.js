@@ -18,8 +18,8 @@ function MobileSidebar({ active, setActive, tabs }) {
   });
 
   return (
-    <aside className="absolute top-[65px] left-0 h-fit shadow-lg">
-      <div className="flex flex-col items-start justify-center select-none font-poppins">
+    <aside className="absolute z-50 top-[65px] left-0 h-fit shadow-lg">
+      <div className="flex flex-col items-start justify-center bg-white select-none font-poppins">
         {renderNavigationPanel}
       </div>
     </aside>

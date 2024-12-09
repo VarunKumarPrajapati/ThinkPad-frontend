@@ -1,5 +1,8 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
+import { MdOutlineEmojiObjects } from "react-icons/md";
+
+import Icon from "./Icon";
 
 function Logo({ className }) {
   return (
@@ -11,9 +14,13 @@ function Logo({ className }) {
     >
       <h1 className="flex items-baseline justify-center text-nowrap">
         <span className="text-orange-600">Think</span>
-        <span className="text-black transition-all duration-200 material-symbols-outlined group-hover:text-3xl group-hover:text-yellow-300">
-          emoji_objects
-        </span>
+
+        <Icon
+          plain
+          size={30}
+          icon={MdOutlineEmojiObjects}
+          className="text-black transition-all duration-200 group-hover:text-yellow-300"
+        />
 
         <span className="text-blue-600">Pad</span>
       </h1>

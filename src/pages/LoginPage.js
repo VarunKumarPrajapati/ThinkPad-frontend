@@ -87,6 +87,7 @@ function LoginPage() {
               placeholder="Email"
             />
             <Input
+              password
               onChange={handleChange}
               name="password"
               className="px-3 py-2 bg-gray-200 rounded-md"

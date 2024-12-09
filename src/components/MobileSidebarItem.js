@@ -1,12 +1,12 @@
 import React from "react";
-import GIcon from "./common/GIcon";
+import Icon from "./common/Icon";
 import { twMerge } from "tailwind-merge";
 import usePropsContext from "../hooks/use-propsContext";
 
 function MobileSidebarItem({ className, tab, setActive }) {
   const { setIsSidebarExpanded } = usePropsContext();
   const handleClick = () => {
-    setActive(tab.icon);
+    setActive(tab.name);
     setIsSidebarExpanded(false);
   };
 
@@ -19,9 +19,8 @@ function MobileSidebarItem({ className, tab, setActive }) {
         className
       )}
     >
-      <GIcon clickable outline>
-        {tab.icon}
-      </GIcon>
+      <Icon icon={tab.icon} />
+
       <h4 className="text-sm">{tab.name}</h4>
     </div>
   );

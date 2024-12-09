@@ -1,8 +1,9 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-import GIcon from "./common/GIcon";
 import Loading from "./common/Loading";
+import Icon from "./common/Icon";
+import { MdCheck } from "react-icons/md";
 
 function AvatarListItem({
   selectedAvatar,
@@ -29,7 +30,7 @@ function AvatarListItem({
           {loading ? (
             <Loading className="text-white" />
           ) : (
-            <GIcon icon="check" className="!text-white" />
+            <Icon plain icon={MdCheck} className="!text-white" />
           )}
         </span>
       )}

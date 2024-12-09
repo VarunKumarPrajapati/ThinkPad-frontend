@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MdLightbulbOutline, MdOutlineArchive } from "react-icons/md";
 
 import DesktopSidebar from "./DesktopSidebar";
 import MobileSidebar from "./MobileSidebar";
@@ -7,11 +8,11 @@ import usePropsContext from "../hooks/use-propsContext";
 
 function Sidebar() {
   const { isMobile, isSidebarExpanded } = usePropsContext();
-  const [active, setActive] = useState("lightbulb_2");
+  const [active, setActive] = useState("Notes");
 
   const tabs = [
     {
-      icon: "lightbulb_2",
+      icon: MdLightbulbOutline,
       name: "Notes",
     },
     // {
@@ -27,7 +28,7 @@ function Sidebar() {
     //   name: "Edit labels",
     // },
     {
-      icon: "archive",
+      icon: MdOutlineArchive,
       name: "Archive",
     },
   ];

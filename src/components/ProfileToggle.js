@@ -1,8 +1,10 @@
 import React, { useEffect, forwardRef, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useNavigate } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
+import { MdEdit, MdOutlineLogout } from "react-icons/md";
 
-import GIcon from "./common/GIcon";
+import Icon from "./common/Icon";
 import Avatar from "./common/Avatar";
 import UpdateProfile from "./UpdateProfile";
 
@@ -48,22 +50,24 @@ const ProfileToggle = forwardRef(({ className, user, closeToggle }, ref) => {
     >
       <div className="flex items-center justify-end w-full pl-1.5 pt-0.5">
         <div className="w-full font-semibold">User Profile</div>
-        <GIcon
-          icon="edit"
-          clickable
-          className="!text-xl p-1 bg-gray-200 hover:bg-gray-50"
+        <Icon
+          icon={MdEdit}
+          size="20"
+          className="p-1 bg-gray-200 hover:bg-gray-50"
           onClick={() => setIsEdit(!isEdit)}
         />
-        <GIcon
-          icon="close"
-          clickable
-          className="!text-xl p-1 bg-gray-200 hover:bg-gray-50"
+
+        <Icon
+          icon={RxCross2}
+          size="20"
+          className="p-1 bg-gray-200 hover:bg-gray-50"
           onClick={closeToggle}
         />
-        <GIcon
-          icon="logout"
-          clickable
-          className="!text-xl p-1 bg-gray-200 hover:bg-gray-50"
+
+        <Icon
+          icon={MdOutlineLogout}
+          size="20"
+          className="p-1 bg-gray-200 hover:bg-gray-50"
           onClick={handleLogout}
         />
       </div>

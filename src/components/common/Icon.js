@@ -12,9 +12,10 @@ export default function Icon({
     <button
       className={twMerge(
         "flex justify-center items-center",
+        "text-icon-color",
         plain
           ? ""
-          : "p-3 rounded-full transition-colors duration-150 hover:text-black hover:bg-[rgba(95,99,104,0.157)]",
+          : "p-3 mx-1 rounded-full transition-colors duration-150 hover:text-black hover:bg-[rgba(95,99,104,0.157)]",
         className
       )}
       {...rest}

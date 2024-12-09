@@ -1,13 +1,22 @@
 import React, { useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
+import {
+  MdMenu,
+  MdOutlineGridView,
+  MdOutlineSettings,
+  MdOutlineViewAgenda,
+  MdRefresh,
+  MdSearch,
+} from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
 
+import Icon from "./common/Icon";
 import Logo from "./common/Logo";
 import Input from "./common/Input";
-import GIcon from "./common/GIcon";
 import Avatar from "./common/Avatar";
 import ProfileToggle from "./ProfileToggle";
 
 import usePropsContext from "../hooks/use-propsContext";
-import { twMerge } from "tailwind-merge";
 import { useFetchUserQuery } from "../store";
 
 function Navbar() {
@@ -47,9 +56,8 @@ function Navbar() {
       <div className="flex items-center px-3 py-2 md:border-b md:p-2 justify-evenly">
         {/* Logo and Icon only for Desktop */}
         <div className="items-center hidden pr-7 md:flex">
-          <GIcon
-            clickable
-            icon="menu"
+          <Icon
+            icon={MdMenu}
             onClick={() => setIsSidebarExpanded((prevValue) => !prevValue)}
           />
           <Logo />
@@ -65,13 +73,12 @@ function Navbar() {
               )}
             >
               <div className="hidden md:inline-block">
-                <GIcon icon="search" className="p-2 mx-2.5" />
+                <Icon icon={MdSearch} plain className="px-4 rounded-full" />
               </div>
 
               {/* Menu Icon Only for Mobile  */}
-              <GIcon
-                clickable
-                icon="menu"
+              <Icon
+                icon={MdMenu}
                 onClick={() => setIsSidebarExpanded((prevValue) => !prevValue)}
                 className={"md:hidden"}
               />
@@ -86,40 +93,26 @@ function Navbar() {
                 />
               </div>
 
-              <GIcon
-                clickable
-                icon={isLayoutGrid ? "grid_view" : "view_agenda"}
-                outline
+              <Icon
                 onClick={handleLayout}
+                icon={isLayoutGrid ? MdOutlineGridView : MdOutlineViewAgenda}
                 className="hover:text-black md:hidden"
               />
 
               <div className="hidden md:inline-block">
-                <GIcon
-                  clickable
-                  icon="close"
-                  className="p-2 mx-2.5"
-                  type="reset"
-                />
+                <Icon icon={RxCross2} className="p-2 mx-2.5" type="reset" />
               </div>
             </form>
           </div>
 
           <div className="hidden md:flex">
-            <GIcon clickable icon="refresh" className=" hover:text-black" />
-            <GIcon
-              clickable
-              icon={isLayoutGrid ? "grid_view" : "view_agenda"}
-              outline
-              className="hover:text-black"
+            <Icon icon={MdRefresh} className=" hover:text-black" />
+            <Icon
               onClick={handleLayout}
-            />
-            <GIcon
-              clickable
-              icon="settings"
+              icon={isLayoutGrid ? MdOutlineGridView : MdOutlineViewAgenda}
               className="hover:text-black"
-              outline
             />
+            <Icon icon={MdOutlineSettings} className="hover:text-black" />
           </div>
         </div>
 

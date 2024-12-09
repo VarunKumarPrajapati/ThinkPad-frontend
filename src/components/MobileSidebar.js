@@ -7,7 +7,7 @@ function MobileSidebar({ active, setActive, tabs }) {
     return (
       <MobileSidebarItem
         className={twMerge(
-          active === tab.icon && "bg-active-icon-color",
+          active === tab.name && "bg-active-icon-color",
           "pl-2 pr-2"
         )}
         tab={tab}

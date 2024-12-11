@@ -1,16 +1,9 @@
 import React from "react";
 import DesktopSidebarItem from "./DesktopSidebarItem";
 
-function DesktopSidebar({ tabs, active, setActive }) {
+function DesktopSidebar({ tabs }) {
   const renderNavigationPanel = tabs.map((tab, key) => {
-    return (
-      <DesktopSidebarItem
-        tab={tab}
-        active={active}
-        setActive={setActive}
-        key={key}
-      />
-    );
+    return <DesktopSidebarItem tab={tab} key={key} />;
   });
 
   return (

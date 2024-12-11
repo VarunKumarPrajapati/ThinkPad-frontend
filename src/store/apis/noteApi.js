@@ -15,6 +15,7 @@ const noteApi = createApi({
           url: "/",
           method: "GET",
         }),
+        keepUnusedDataFor: 0,
       }),
 
       createNote: builder.mutation({

@@ -1,17 +1,19 @@
 import React from "react";
 
-import Note from "./Note";
+import CommonNoteList from "./CommonNoteList";
+import ArchiveNoteList from "./ArchiveNoteList";
 
-import { useFetchNotesQuery } from "../store";
+import usePropsContext from "../hooks/use-propsContext";
 
 function NoteList() {
-  const { data: notes } = useFetchNotesQuery();
+  const { active } = usePropsContext();
 
-  const renderNoteList = notes?.map((note, key) => {
-    return <Note note={note} key={key} />;
-  });
-
-  return <div className="flex flex-wrap w-full h-full">{renderNoteList}</div>;
+  return (
+    <div className="w-full h-full">
+      {active === "Notes" && <CommonNoteList />}
+      {active === "Archive" && <ArchiveNoteList />}
+    </div>
+  );
 }
 
 export default NoteList;

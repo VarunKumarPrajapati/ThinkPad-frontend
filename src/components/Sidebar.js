@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdLightbulbOutline, MdOutlineArchive } from "react-icons/md";
 
 import DesktopSidebar from "./DesktopSidebar";
@@ -8,7 +8,6 @@ import usePropsContext from "../hooks/use-propsContext";
 
 function Sidebar() {
   const { isMobile, isSidebarExpanded } = usePropsContext();
-  const [active, setActive] = useState("Notes");
 
   const tabs = [
     {
@@ -36,11 +35,9 @@ function Sidebar() {
   return (
     <>
       {isMobile ? (
-        isSidebarExpanded && (
-          <MobileSidebar tabs={tabs} active={active} setActive={setActive} />
-        )
+        isSidebarExpanded && <MobileSidebar tabs={tabs} />
       ) : (
-        <DesktopSidebar tabs={tabs} active={active} setActive={setActive} />
+        <DesktopSidebar tabs={tabs} />
       )}
     </>
   );

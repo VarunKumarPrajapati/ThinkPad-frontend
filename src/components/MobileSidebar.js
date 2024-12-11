@@ -1,8 +1,13 @@
 import React from "react";
-import MobileSidebarItem from "./MobileSidebarItem";
 import { twMerge } from "tailwind-merge";
 
-function MobileSidebar({ active, setActive, tabs }) {
+import MobileSidebarItem from "./MobileSidebarItem";
+
+import usePropsContext from "../hooks/use-propsContext";
+
+function MobileSidebar({ tabs }) {
+  const { active } = usePropsContext();
+
   const renderNavigationPanel = tabs.map((tab, key) => {
     return (
       <MobileSidebarItem
@@ -11,7 +16,6 @@ function MobileSidebar({ active, setActive, tabs }) {
           "pl-2 pr-2"
         )}
         tab={tab}
-        setActive={setActive}
         key={key}
       />
     );

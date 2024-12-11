@@ -3,8 +3,9 @@ import Icon from "./common/Icon";
 import { twMerge } from "tailwind-merge";
 import usePropsContext from "../hooks/use-propsContext";
 
-function MobileSidebarItem({ className, tab, setActive }) {
-  const { setIsSidebarExpanded } = usePropsContext();
+function MobileSidebarItem({ className, tab }) {
+  const { setIsSidebarExpanded, setActive } = usePropsContext();
+
   const handleClick = () => {
     setActive(tab.name);
     setIsSidebarExpanded(false);

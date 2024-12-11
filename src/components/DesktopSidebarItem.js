@@ -4,8 +4,8 @@ import { twMerge } from "tailwind-merge";
 
 import usePropsContext from "../hooks/use-propsContext";
 
-function DesktopSidebarItem({ tab, active, setActive, className }) {
-  const { isSidebarExpanded } = usePropsContext();
+function DesktopSidebarItem({ tab, className }) {
+  const { isSidebarExpanded, active, setActive } = usePropsContext();
 
   return (
     <div

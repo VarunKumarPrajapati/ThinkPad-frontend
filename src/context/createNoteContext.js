@@ -3,6 +3,7 @@ import React, { useState, createContext } from "react";
 const CreateNoteContext = createContext();
 
 function CreateNoteProvider({ children }) {
+  const [modeWorkspace, setModeWorkspace] = useState("none");
   const [isCreatingNote, setCreatingNote] = useState(false);
   const [toggle, setToggle] = useState("none");
   const [note, setNote] = useState({
@@ -29,6 +30,8 @@ function CreateNoteProvider({ children }) {
   ];
 
   const data = {
+    modeWorkspace,
+    setModeWorkspace,
     isCreatingNote,
     setCreatingNote,
     toggle,

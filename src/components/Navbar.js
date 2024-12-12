@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import {
   MdMenu,
@@ -21,12 +21,16 @@ import { useFetchUserQuery } from "../store";
 
 function Navbar() {
   const toggleButton = useRef(null);
+  const sidebarBtnRef = useRef(null);
 
   const {
     setIsSidebarExpanded,
     isLayoutGrid,
     setIsLayoutGrid,
+
+    setSidebarBtnRef,
   } = usePropsContext();
+
   const { data: user, isLoading } = useFetchUserQuery();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isSearchBarFocused, setSearchBarFocused] = useState(false);
@@ -51,8 +55,12 @@ function Navbar() {
     setSearchBarFocused(false);
   };
 
+  useEffect(() => {
+    setSidebarBtnRef(sidebarBtnRef);
+  }, [setSidebarBtnRef]);
+
   return (
-    <header className="absolute top-0 w-full bg-white h-fit">
+    <header className="w-full bg-white">
       <div className="flex items-center px-3 py-2 md:border-b md:p-2 justify-evenly">
         {/* Logo and Icon only for Desktop */}
         <div className="items-center hidden pr-7 md:flex">
@@ -78,6 +86,7 @@ function Navbar() {
 
               {/* Menu Icon Only for Mobile  */}
               <Icon
+                ref={sidebarBtnRef}
                 icon={MdMenu}
                 onClick={() => setIsSidebarExpanded((prevValue) => !prevValue)}
                 className={"md:hidden"}
@@ -128,6 +137,7 @@ function Navbar() {
             />
           </button>
         </div>
+
         {isToggleOpen && (
           <ProfileToggle
             ref={toggleButton}

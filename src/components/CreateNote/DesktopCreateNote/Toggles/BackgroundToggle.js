@@ -1,6 +1,6 @@
 import React from "react";
 
-import ColorPalette from "./ColorPalette";
+import ColorPalette from "../../Features/ColorPalette/ColorPalette";
 
 function BackgroundToggle() {
   return (

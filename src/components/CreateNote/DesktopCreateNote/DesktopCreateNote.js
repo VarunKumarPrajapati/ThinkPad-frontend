@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { RiPushpin2Line, RiPushpin2Fill } from "react-icons/ri";
 
-import Icon from "./common/Icon";
-import Input from "./common/Input";
-import TextArea from "./common/TextArea";
-import CreateNoteFeatures from "./DesktopCreateNoteFeatures";
+import Icon from "../../common/Icon";
+import Input from "../../common/Input";
+import TextArea from "../../common/TextArea";
+import CreateNoteFeatures from "../Features/DesktopCreateNoteFeatures";
 
-import useCreateNoteContext from "../hooks/use-createNoteContext";
-import { useCreateNoteMutation } from "../store";
+import useCreateNoteContext from "../../../hooks/use-createNoteContext";
+import { useCreateNoteMutation } from "../../../store";
 
 function CreateNote() {
   const noteRef = useRef(null);

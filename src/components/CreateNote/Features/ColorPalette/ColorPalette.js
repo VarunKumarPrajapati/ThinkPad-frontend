@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { MdOutlineFormatColorReset } from "react-icons/md";
 
-import ColorPaletteItem from "./ColorPaletteItem";
+import ColorPaletteItem from "./ColorPaletteItem/ColorPaletteItem";
 
-import useCreateNoteContext from "../hooks/use-createNoteContext";
+import useCreateNoteContext from "../../../../hooks/use-createNoteContext";
 
 function ColorPalette() {
   const { setNote, note, colors } = useCreateNoteContext();

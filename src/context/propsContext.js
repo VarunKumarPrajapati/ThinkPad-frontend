@@ -3,20 +3,20 @@ import { createContext, useState } from "react";
 const propsContext = createContext();
 
 function PropsProvider({ children }) {
-  const [active, setActive] = useState("Notes");
   const [isMobile, setIsMobile] = useState(false);
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [isLayoutGrid, setIsLayoutGrid] = useState(true);
+  const [sidebarBtnRef, setSidebarBtnRef] = useState(null);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   const props = {
-    active,
-    setActive,
     isMobile,
     setIsMobile,
     isLayoutGrid,
     isSidebarExpanded,
     setIsLayoutGrid,
     setIsSidebarExpanded,
+    sidebarBtnRef,
+    setSidebarBtnRef,
   };
 
   return (

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import Main from "../components/Main";
 import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
+import CreateNote from "../components/CreateNote/CreateNote";
+import ArchiveNotePage from "./ArchiveNotePage";
+import CommonNotePage from "./CommonNotePage";
 
 import usePropsContext from "../hooks/use-propsContext";
 import { useFetchUserQuery } from "../store";
@@ -34,14 +36,22 @@ function MainPage() {
     };
   }, [setIsMobile]);
 
+  console.log("From main page...");
+
   return (
-    <div className="w-screen h-screen overflow-hidden font-roboto">
-      <ToastContainer />
+    <div className="flex flex-col w-screen h-screen font-roboto">
       <Navbar user={data} />
-      <div className="flex w-full h-full pt-[65px]">
-        <Sidebar />
-        <Main />
-      </div>
+
+      <Sidebar>
+        <CreateNote />
+
+        <Routes>
+          <Route path="/" element={<CommonNotePage />} />
+          <Route path="/archive" element={<ArchiveNotePage />} />
+        </Routes>
+      </Sidebar>
+
+      <ToastContainer />
     </div>
   );
 }

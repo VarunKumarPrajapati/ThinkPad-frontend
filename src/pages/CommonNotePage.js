@@ -1,10 +1,10 @@
 import React from "react";
 
-import Note from "./Note";
+import Note from "../components/Note";
 
 import { useFetchNotesQuery } from "../store";
 
-function CommonNoteList() {
+function CommonNotePage() {
   const { data: notes } = useFetchNotesQuery();
 
   const pinnedNoteList = notes
@@ -16,22 +16,22 @@ function CommonNoteList() {
     .map((note, key) => <Note note={note} key={key} />);
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-full px-4">
       {pinnedNoteList?.length > 0 && (
-        <div>
+        <div className="flex flex-col">
           {<div className="text-sm">Pinned</div>}
-          <div className="flex flex-wrap flex-shrink-0">{pinnedNoteList}</div>
+          <div className="flex flex-wrap md:flex-row">{pinnedNoteList}</div>
         </div>
       )}
 
       {renderNoteList?.length > 0 && (
-        <div>
+        <div className="flex flex-col">
           {pinnedNoteList.length > 0 && <div className="text-sm">Others</div>}
-          <div className="flex flex-wrap flex-shrink-0">{renderNoteList}</div>
+          <div className="flex flex-row flex-wrap ">{renderNoteList}</div>
         </div>
       )}
     </div>
   );
 }
 
-export default CommonNoteList;
+export default CommonNotePage;

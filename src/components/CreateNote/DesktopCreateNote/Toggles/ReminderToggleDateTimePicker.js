@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { IoMdArrowBack } from "react-icons/io";
 
-import Icon from "./common/Icon";
-import Button from "./common/Button";
-import TimePicker from "./TimePicker";
+import Icon from "../../../common/Icon";
+import Button from "../../../common/Button";
+import TimePicker from "../Features/TimePicker/TimePicker";
 
 function ReminderToggleDateTimePicker({ className, goBack }) {
   const [time, setTime] = useState("");

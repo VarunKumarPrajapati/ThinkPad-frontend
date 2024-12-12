@@ -10,7 +10,7 @@ function Router() {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/*"
         element={
           <PropsProvider>
             <MainPage />
@@ -18,7 +18,7 @@ function Router() {
         }
       />
       <Route path="/login" element={<LoginPage />} />
-      <Route path={"/signup"} element={<SignupPage />} />
+      <Route path="/signup" element={<SignupPage />} />
     </Routes>
   );
 }

@@ -10,13 +10,13 @@ import {
   // MdOutlineImage,
 } from "react-icons/md";
 
-import Icon from "./common/Icon";
-import Button from "./common/Button";
-import MoreToggle from "./MoreToggle";
-import BackgroundToggle from "./BackgroundToggle";
+import Icon from "../../common/Icon";
+import Button from "../../common/Button";
+import MoreToggle from "../DesktopCreateNote/Toggles/MoreToggle";
+import BackgroundToggle from "../DesktopCreateNote/Toggles/BackgroundToggle";
 // import ReminderToggle from "./ReminderToggle";
 
-import useCreateNoteContext from "../hooks/use-createNoteContext";
+import useCreateNoteContext from "../../../hooks/use-createNoteContext";
 
 function CreateNoteFeatures() {
   const toggleRef = useRef(null);

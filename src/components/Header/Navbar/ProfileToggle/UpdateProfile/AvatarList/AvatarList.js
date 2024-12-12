@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import AvatarListItem from "./AvatarListItem";
+import AvatarListItem from "./AvatarListItem/AvatarListItem";
 
-import { useFetchUserQuery, useUpdateUserMutation } from "../store";
+import {
+  useFetchUserQuery,
+  useUpdateUserMutation,
+} from "../../../../../../store";
 
 function AvatarList() {
   const { data } = useFetchUserQuery();

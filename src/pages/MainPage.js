@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Header/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CreateNote from "../components/CreateNote/CreateNote";
 import ArchiveNotePage from "./ArchiveNotePage";
@@ -10,6 +10,7 @@ import CommonNotePage from "./CommonNotePage";
 
 import usePropsContext from "../hooks/use-propsContext";
 import { useFetchUserQuery } from "../store";
+import Header from "../components/Header/Header";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -40,7 +41,9 @@ function MainPage() {
 
   return (
     <div className="flex flex-col w-screen h-screen font-roboto">
-      <Navbar user={data} />
+      <Header>
+        <Navbar user={data} />
+      </Header>
 
       <Sidebar>
         <CreateNote />

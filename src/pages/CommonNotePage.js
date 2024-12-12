@@ -1,6 +1,6 @@
 import React from "react";
 
-import Note from "../components/Note";
+import { Note } from "../components/common";
 
 import { useFetchNotesQuery } from "../store";
 

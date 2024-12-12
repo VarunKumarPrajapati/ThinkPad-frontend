@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { MdOutlineCheck } from "react-icons/md";
 
-import AvatarList from "./AvatarList";
-import Loading from "./common/Loading";
+import AvatarList from "./AvatarList/AvatarList";
+import { Icon, Loading } from "../../../../common";
 
-import { useFetchUserQuery, useUpdateUserMutation } from "../store";
+import { useFetchUserQuery, useUpdateUserMutation } from "../../../../../store";
 
 function UpdateProfile() {
   const { data } = useFetchUserQuery();
@@ -42,9 +43,9 @@ function UpdateProfile() {
         ) : (
           <button
             type="submit"
-            className="flex items-center justify-center text-black rounded-md hover:text-white hover:bg-blue-600"
+            className="text-black rounded-md hover:text-white hover:bg-blue-600"
           >
-            <span className="w-full material-symbols-outlined">check</span>
+            <Icon plain icon={MdOutlineCheck} className="text-inherit" />
           </button>
         )}
       </form>

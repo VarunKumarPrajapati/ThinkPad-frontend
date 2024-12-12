@@ -1,9 +1,8 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
-
-import Loading from "./common/Loading";
-import Icon from "./common/Icon";
 import { MdCheck } from "react-icons/md";
+
+import { Loading, Icon } from "../../../../../../common";
 
 function AvatarListItem({
   selectedAvatar,

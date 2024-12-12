@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
 import { MdEdit, MdOutlineLogout } from "react-icons/md";
 
-import Icon from "./common/Icon";
-import Avatar from "./common/Avatar";
-import UpdateProfile from "./UpdateProfile";
+import { Icon, Avatar } from "../../../common";
+import UpdateProfile from "./UpdateProfile/UpdateProfile";
 
-import { useLogoutMutation } from "../store";
+import { useLogoutMutation } from "../../../../store";
 
 const ProfileToggle = forwardRef(({ className, user, closeToggle }, ref) => {
   const navigate = useNavigate();

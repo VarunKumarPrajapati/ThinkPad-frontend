@@ -10,7 +10,7 @@ import {
   MdOutlinePalette,
 } from "react-icons/md";
 
-import Icon from "./common/Icon";
+import Icon from "./Icon";
 
 function Note({ note }) {
   const [isToggleOpen, setToggleOpen] = useState(false);

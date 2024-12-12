@@ -10,14 +10,11 @@ import {
 } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
-import Icon from "./common/Icon";
-import Logo from "./common/Logo";
-import Input from "./common/Input";
-import Avatar from "./common/Avatar";
-import ProfileToggle from "./ProfileToggle";
+import { Icon, Logo, Input, Avatar } from "../../common";
+import ProfileToggle from "./ProfileToggle/ProfileToggle";
 
-import usePropsContext from "../hooks/use-propsContext";
-import { useFetchUserQuery } from "../store";
+import usePropsContext from "../../../hooks/use-propsContext";
+import { useFetchUserQuery } from "../../../store";
 
 function Navbar() {
   const toggleButton = useRef(null);

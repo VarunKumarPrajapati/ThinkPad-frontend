@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Bounce, ToastContainer } from "react-toastify";
+import { ToastContainer, Bounce } from "react-toastify";
 
 import Routes from "./Routes";
 

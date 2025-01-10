@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
 import Navbar from "../components/Header/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
@@ -53,8 +52,6 @@ function MainPage() {
           <Route path="/archive" element={<ArchiveNotePage />} />
         </Routes>
       </Sidebar>
-
-      <ToastContainer />
     </div>
   );
 }

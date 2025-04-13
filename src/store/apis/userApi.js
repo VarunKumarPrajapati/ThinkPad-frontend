@@ -8,21 +8,6 @@ const userApi = createApi({
   }),
   endpoints: (builder) => {
     return {
-      signUp: builder.mutation({
-        query: (data) => ({
-          url: "/",
-          method: "POST",
-          body: data,
-        }),
-      }),
-      login: builder.mutation({
-        query: (data) => ({
-          url: "/login",
-          method: "POST",
-          body: data,
-        }),
-      }),
-
       fetchUser: builder.query({
         providesTags: ["USER"],
         query: () => ({
@@ -36,22 +21,9 @@ const userApi = createApi({
         invalidatesTags: ["USER"],
         query: (data) => ({ url: "update/me", method: "PATCH", body: data }),
       }),
-
-      logout: builder.mutation({
-        query: () => ({
-          url: "/logout",
-          method: "GET",
-        }),
-      }),
     };
   },
 });
 
-export const {
-  useFetchUserQuery,
-  useLoginMutation,
-  useLogoutMutation,
-  useSignUpMutation,
-  useUpdateUserMutation,
-} = userApi;
+export const { useFetchUserQuery, useUpdateUserMutation } = userApi;
 export { userApi };

@@ -31,10 +31,21 @@ const authApi = createApi({
           method: "GET",
         }),
       }),
+
+      verifyEmail: builder.mutation({
+        query: (token) => ({
+          url: `/verify-email?token=${token}`,
+          method: "GET",
+        }),
+      }),
     };
   },
 });
 
-export const { useLoginMutation, useLogoutMutation, useSignUpMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useSignUpMutation,
+  useVerifyEmailMutation,
+} = authApi;
 export { authApi };

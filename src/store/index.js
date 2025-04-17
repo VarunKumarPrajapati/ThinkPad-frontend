@@ -13,7 +13,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(userApi.middleware)
+      .concat(authApi.middleware)
       .concat(userApi.middleware)
       .concat(noteApi.middleware),
 });
@@ -26,6 +26,7 @@ export {
   useLoginMutation,
   useLogoutMutation,
   useSignUpMutation,
+  useVerifyEmailMutation,
 } from "./apis/authApi";
 
 export { useCreateNoteMutation, useFetchNotesQuery } from "./apis/noteApi";

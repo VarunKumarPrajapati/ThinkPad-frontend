@@ -8,7 +8,7 @@ function Logo({ className }) {
   return (
     <div
       className={twMerge(
-        "cursor-pointer select-none !font-poppins group w-[145px] text-xl font-bold",
+        "cursor-pointer select-none !font-poppins group text-xl font-bold",
         className
       )}
     >

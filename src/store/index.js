@@ -27,6 +27,8 @@ export {
   useLogoutMutation,
   useSignUpMutation,
   useVerifyEmailMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
 } from "./apis/authApi";
 
 export { useCreateNoteMutation, useFetchNotesQuery } from "./apis/noteApi";

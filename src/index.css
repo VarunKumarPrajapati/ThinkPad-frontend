@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: transparent !important; /* or a color that fits your design */
+  box-shadow: none !important; /* Remove unwanted box shadow */
+  transition: background-color 5000s ease-in-out 0s; /* Prevent background change */
+}

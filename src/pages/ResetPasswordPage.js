@@ -22,6 +22,9 @@ export default function ResetPasswordPage() {
     e.preventDefault();
     const urlFragments = window.location.href.split("/");
     const token = urlFragments[urlFragments.length - 1];
+
+    if (data.password.length < 3)
+      return toast.error("Password should be more then 3 characters");
     resetPassword({ ...data, token });
   };
 
@@ -39,15 +42,15 @@ export default function ResetPasswordPage() {
     }
 
     if (isError) {
-      toast.error(error.data.message);
+      toast.error(error?.data?.message);
       navigate("/login");
     }
-  }, [data, isSuccess, isError]);
+  }, [data, isSuccess, isError, error, navigate]);
 
   return (
-    <div className="flex flex-col-reverse items-center w-screen h-screen md:flex-row">
-      <div className="h-full w-full md:w-[385px]">
-        <form className="mx-4 my-12 md:mr-0 md:ml-12" onSubmit={handleSubmit}>
+    <div className="w-screen h-screen font-poppins">
+      <div className="flex flex-col-reverse items-center justify-center w-full h-full md:flex-row ">
+        <div className="md:max-w-[385px] h-full px-4 py-12 md:pr-10 md:pl-12">
           <div className="flex justify-start">
             <Logo className="text-4xl" />
           </div>
@@ -57,59 +60,55 @@ export default function ResetPasswordPage() {
             will be sent to you with instructions about how to complete the
             process.
           </p>
-          <fieldset>
-            <label className="text-sm font-bold">
-              New Password
-              <div className="mt-1">
-                <div>
-                  <Input
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    value={data.password}
-                    className="md:px-2.5 md:py-2 px-4 py-4 text-sm border border-black rounded-md font-medium md:w-10/12"
-                  />
-                </div>
-              </div>
-            </label>
+          <form onSubmit={handleSubmit}>
+            <fieldset>
+              <Input
+                label="Password"
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                onChange={handleChange}
+                value={data.password}
+                autoComplete="off"
+              />
 
-            <label className="text-sm font-bold">
-              Confirm Password
-              <div className="mt-1">
-                <div>
-                  <Input
-                    name="confirmPassword"
-                    onChange={handleChange}
-                    value={data.confirmPassword}
-                    className="md:px-2.5 md:py-2 px-4 py-4 text-sm border border-black rounded-md font-medium md:w-10/12"
-                  />
-                </div>
-              </div>
-            </label>
-          </fieldset>
-          <footer>
-            <Button
-              type="submit"
-              loading={isLoading}
-              disabled={
-                !(data.password.length && data.confirmPassword.length && isSame)
-              }
-              className="w-full md:w-fit px-3 py-2 md:py-1.5 mt-12 md:mt-6 mb-4 text-base md:text-sm font-bold bg-green-700"
-            >
-              Change Password
-            </Button>
-          </footer>
-        </form>
+              <Input
+                label="Confirm Password"
+                name="confirmPassword"
+                placeholder="Enter Confirm Password"
+                onChange={handleChange}
+                value={data.confirmPassword}
+                autoComplete="off"
+              />
+            </fieldset>
+            <footer className="flex justify-end mt-2">
+              <Button
+                type="submit"
+                loading={isLoading}
+                disabled={
+                  !(
+                    data.password.length &&
+                    data.confirmPassword.length &&
+                    isSame
+                  )
+                }
+                className="md:w-7/12"
+              >
+                Change Password
+              </Button>
+            </footer>
+          </form>
+        </div>
+
+        <div className="flex-1 hidden md:block md:w-[200px] md:h-screen">
+          <img
+            src="https://assets.mongodb-cdn.com/mms/static/images/auth/login_desktop.svg"
+            alt="bg"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="block w-full h-16 bg-black lg:hidden"></div>
       </div>
-      <div
-        className="flex-1 hidden md:block md:w-[200px] md:h-screen"
-        style={{
-          backgroundImage: `url(
-              "https://assets.mongodb-cdn.com/mms/static/images/auth/login_desktop.svg"
-            )`,
-        }}
-      ></div>
-      <div className="block w-full h-16 bg-black lg:hidden"></div>
     </div>
   );
 }

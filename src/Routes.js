@@ -8,6 +8,7 @@ import SignupPage from "./pages/SignupPage";
 import VerificationPage from "./pages/VerificationPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+// import Playground from "./pages/Playground";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/verify-email" element={<VerificationPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+      {/* <Route path="/playground" element={<Playground />} /> */}
     </Routes>
   );
 }

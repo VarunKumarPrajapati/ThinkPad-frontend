@@ -9,9 +9,9 @@ async function signUpDataValidation(data) {
 
   try {
     const validData = await schema.validate(data);
-    return { validData, error: null };
+    return { validData };
   } catch (error) {
-    return { validData: null, error: error.message };
+    return { validData: null, [error.path]: error.message };
   }
 }
 
@@ -23,10 +23,27 @@ async function loginDataValidation(data) {
 
   try {
     const validData = await schema.validate(data);
-    return { validData, error: null };
+    return { validData };
   } catch (error) {
-    return { validData: null, error: error.message };
+    return { validData: null, [error.path]: error.message };
   }
 }
 
-export { signUpDataValidation, loginDataValidation };
+async function forgotPasswordDataValidation(email) {
+  const schema = object({
+    email: string().email().required(),
+  });
+
+  try {
+    const validData = await schema.validate(email);
+    return { validData };
+  } catch (error) {
+    return { validData: null, [error.path]: error.message };
+  }
+}
+
+export {
+  signUpDataValidation,
+  loginDataValidation,
+  forgotPasswordDataValidation,
+};

@@ -41,12 +41,12 @@ function UpdateProfile() {
         {isLoading ? (
           <Loading />
         ) : (
-          <button
+          <Icon
+            plain
             type="submit"
-            className="text-black rounded-md hover:text-white hover:bg-blue-600"
-          >
-            <Icon plain icon={MdOutlineCheck} className="text-inherit" />
-          </button>
+            icon={MdOutlineCheck}
+            className="text-black rounded-md text-inherit hover:text-white hover:bg-blue-600"
+          />
         )}
       </form>
     </>

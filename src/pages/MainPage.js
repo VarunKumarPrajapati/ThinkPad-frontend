@@ -17,9 +17,7 @@ function MainPage() {
   const { setIsMobile } = usePropsContext();
 
   useEffect(() => {
-    if (error?.status === 401) {
-      navigate("/login");
-    }
+    if (error?.status === 401) navigate("/login");
   }, [data, navigate, error]);
 
   useEffect(() => {
@@ -35,8 +33,6 @@ function MainPage() {
       window.removeEventListener("resize", handleResize);
     };
   }, [setIsMobile]);
-
-  console.log("From main page...");
 
   return (
     <div className="flex flex-col w-screen h-screen font-roboto">

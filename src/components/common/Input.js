@@ -44,6 +44,8 @@ export default function Input({
   error,
   iconRight: IconRight,
   label,
+  leftIcon: LeftIcon,
+  rightIcon: RightIcon,
   name,
   onChange,
   placeholder,
@@ -61,7 +63,7 @@ export default function Input({
       : type;
 
   return (
-    <div className="w-full mb-2.5">
+    <div className="flex flex-col items-start justify-center w-full">
       {label && (
         <label htmlFor={name} className="block mb-1 text-sm font-medium">
           {label}
@@ -70,12 +72,13 @@ export default function Input({
 
       <div
         className={twMerge(
-          `flex items-center px-2.5 md:py-1 py-2 bg-white rounded-md border-2 border-black focus-within:border-blue-500 
+          `flex items-center w-full px-2.5 md:py-1 py-2 bg-white rounded-md border-2 border-black focus-within:border-blue-500 
           focus-within:duration-200 focus-within:transition-colors`,
           error && "border-red-500",
           className
         )}
       >
+        {LeftIcon && LeftIcon}
         <input
           autoComplete={autoComplete}
           className="flex-1 w-full bg-transparent focus:outline-none"
@@ -87,6 +90,7 @@ export default function Input({
           value={value}
           {...rest}
         />
+        {RightIcon && RightIcon}
 
         {showToggle && type === "password" && (
           <button

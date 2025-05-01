@@ -8,18 +8,14 @@ import { Icon, Avatar } from "../../../common";
 import UpdateProfile from "./UpdateProfile/UpdateProfile";
 
 import { useLogoutMutation } from "../../../../store";
+import { toast } from "react-toastify";
 
 const ProfileToggle = forwardRef(({ className, user, closeToggle }, ref) => {
   const navigate = useNavigate();
   const toggle = useRef(null);
   const { email, username, avatar } = user;
   const [isEdit, setIsEdit] = useState(false);
-  const [logout] = useLogoutMutation();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+  const [logout, { isSuccess, isLoading, isError }] = useLogoutMutation();
 
   useEffect(() => {
     const handleCloseToggle = (e) => {
@@ -34,10 +30,13 @@ const ProfileToggle = forwardRef(({ className, user, closeToggle }, ref) => {
 
     document.addEventListener("click", handleCloseToggle);
 
+    if (isSuccess) navigate("/login");
+    if (isError) toast.warning("Something went wrong");
+
     return () => {
       document.removeEventListener("click", handleCloseToggle);
     };
-  }, [closeToggle, ref]);
+  }, [closeToggle, ref, isSuccess, isError,navigate]);
 
   return (
     <div
@@ -67,7 +66,8 @@ const ProfileToggle = forwardRef(({ className, user, closeToggle }, ref) => {
           icon={MdOutlineLogout}
           size="20"
           className="p-1 bg-gray-200 hover:bg-gray-50"
-          onClick={handleLogout}
+          onClick={() => logout()}
+          disabled={isLoading}
         />
       </div>
 

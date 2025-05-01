@@ -68,7 +68,7 @@ export default function SignupPage() {
             </h2>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col items-center justify-center w-10/12 mt-2 text-base md:w-9/12"
+              className="flex flex-col items-center justify-center w-10/12 mt-2 text-base md:w-9/12 gap-y-2.5"
             >
               <Input
                 onChange={handleChange}
@@ -98,7 +98,7 @@ export default function SignupPage() {
                 value={data.password}
                 error={validationError.password}
               />
-              <Button loading={isLoading} className="w-full mt-2">
+              <Button loading={isLoading} className="w-full">
                 Create Account
               </Button>
             </form>

@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
               value={value}
             />
 
-            <footer>
+            <footer className="mt-2.5">
               <Button
                 className="w-full"
                 type="submit"

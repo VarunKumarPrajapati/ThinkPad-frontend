@@ -61,7 +61,7 @@ export default function ResetPasswordPage() {
             process.
           </p>
           <form onSubmit={handleSubmit}>
-            <fieldset>
+            <fieldset className="flex flex-col gap-y-2.5">
               <Input
                 label="Password"
                 type="password"
@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
                 autoComplete="off"
               />
             </fieldset>
-            <footer className="flex justify-end mt-2">
+            <footer className="flex justify-end mt-2.5">
               <Button
                 type="submit"
                 loading={isLoading}

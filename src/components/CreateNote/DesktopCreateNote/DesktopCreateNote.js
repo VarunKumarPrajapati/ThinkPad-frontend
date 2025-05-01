@@ -13,13 +13,8 @@ function CreateNote() {
   const noteRef = useRef(null);
   const [createNote] = useCreateNoteMutation();
 
-  const {
-    colors,
-    isCreatingNote,
-    note,
-    setCreatingNote,
-    setNote,
-  } = useCreateNoteContext();
+  const { colors, isCreatingNote, note, setCreatingNote, setNote } =
+    useCreateNoteContext();
 
   const handleCreatingNote = () => {
     setCreatingNote(true);
@@ -42,9 +37,7 @@ function CreateNote() {
   useEffect(() => {
     const handleBlur = (e) => {
       if (noteRef.current && !noteRef.current.contains(e.target)) {
-        if (!(note.content.length === 0) || !(note.title.length === 0)) {
-          createNote(note);
-        }
+        if (note.content.length || note.title.length) createNote(note);
 
         setNote({
           title: "",
@@ -81,13 +74,14 @@ function CreateNote() {
 
           <form
             autoComplete="off"
-            className="*:placeholder:text-gray-600 *:font-medium *:px-4 *:py-3 flex flex-col"
+            className="*:placeholder:text-gray-600 font-medium *:px-4 *:py-3 flex flex-col"
           >
             <Input
               name="title"
               placeholder="Title"
               value={note.title}
               onChange={handleNoteChange}
+              className="!p-0 !m-0 bg-transparent border-0"
             />
 
             <TextArea

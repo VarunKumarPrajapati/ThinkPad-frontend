@@ -36,6 +36,7 @@ export default function SignupPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Account created successfully");
+      toast.info("Verification Mail is sent on the register mail.");
       navigate("/login");
     }
 

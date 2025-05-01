@@ -31,7 +31,9 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="w-screen h-screen font-poppins">
-      <div className="flex w-full h-full gap-x-14">
+      <div className="flex flex-col w-full h-full md:flex-row gap-x-14">
+        <div className="block w-full h-16 bg-black lg:hidden"></div>
+
         <div className="md:max-w-[364px] px-4 py-12 md:pr-0 md:pl-12">
           <div className="flex justify-start">
             <Logo className="text-4xl" />
@@ -69,14 +71,13 @@ export default function ForgotPasswordPage() {
           </form>
         </div>
 
-        <div className="flex-1">
+        <div className="hidden md:flex-1 md:block">
           <img
             src="https://assets.mongodb-cdn.com/mms/static/images/auth/login_desktop.svg"
             alt="bg"
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="block w-full h-16 bg-black lg:hidden"></div>
       </div>
     </div>
   );

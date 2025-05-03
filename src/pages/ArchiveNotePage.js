@@ -1,21 +1,13 @@
-import React from "react";
-
-import { Note } from "../components/common";
-
-import { useFetchNotesQuery } from "../store";
+import { useSelector } from "react-redux";
+import { NoteList } from "../components/ui";
 
 function ArchiveNotePage() {
-  const { data: notes } = useFetchNotesQuery();
-
-  const renderNoteList = notes
-    ?.filter((note) => note.isArchive === true)
-    .map((note, key) => <Note note={note} key={key} />);
+  const notes = useSelector((state) => state.notes);
+  const archives = notes.filter((note) => note.isArchive);
 
   return (
-    <div className="px-4">
-      <div className="flex flex-row flex-wrap flex-shrink-0 w-full h-full ">
-        {renderNoteList}
-      </div>
+    <div className="flex flex-col w-full h-full px-4">
+      <NoteList notes={archives} />
     </div>
   );
 }

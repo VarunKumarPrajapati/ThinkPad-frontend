@@ -1,6 +1,6 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { MdOutlineEmojiObjects } from "react-icons/md";
+import { FaLightbulb } from "react-icons/fa";
 
 import Icon from "./Icon";
 
@@ -18,7 +18,7 @@ function Logo({ className }) {
         <Icon
           plain
           size={30}
-          icon={MdOutlineEmojiObjects}
+          icon={FaLightbulb}
           className="text-black transition-all duration-200 group-hover:text-yellow-300"
         />
 

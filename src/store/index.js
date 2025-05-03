@@ -5,11 +5,16 @@ import { authApi } from "./apis/authApi";
 import { userApi } from "./apis/userApi";
 import { noteApi } from "./apis/noteApi";
 
+import { noteReducer, addNote, setNotes } from "./slices/noteSlice";
+
 export const store = configureStore({
   reducer: {
+    // Here are apis
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [noteApi.reducerPath]: noteApi.reducer,
+    // Here are slices
+    notes: noteReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -20,8 +25,7 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { useFetchUserQuery, useUpdateUserMutation } from "./apis/userApi";
-
+// Exporting
 export {
   useLoginMutation,
   useLogoutMutation,
@@ -30,5 +34,8 @@ export {
   useForgotPasswordMutation,
   useResetPasswordMutation,
 } from "./apis/authApi";
-
+export { useFetchUserQuery, useUpdateUserMutation } from "./apis/userApi";
 export { useCreateNoteMutation, useFetchNotesQuery } from "./apis/noteApi";
+
+// Exporting Actions of slices
+export { addNote, setNotes };

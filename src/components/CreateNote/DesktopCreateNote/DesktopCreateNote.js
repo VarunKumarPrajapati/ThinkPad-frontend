@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { RiPushpin2Line, RiPushpin2Fill } from "react-icons/ri";
 
-import Icon from "../../common/Icon";
-import Input from "../../common/Input";
-import TextArea from "../../common/TextArea";
+import { Icon, Input, TextArea } from "../../common";
 import CreateNoteFeatures from "../Features/DesktopCreateNoteFeatures";
 
 import useCreateNoteContext from "../../../hooks/use-createNoteContext";
@@ -37,7 +35,9 @@ function CreateNote() {
   useEffect(() => {
     const handleBlur = (e) => {
       if (noteRef.current && !noteRef.current.contains(e.target)) {
-        if (note.content.length || note.title.length) createNote(note);
+        if (note.content.length || note.title.length) {
+          createNote(note);
+        }
 
         setNote({
           title: "",

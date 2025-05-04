@@ -1,7 +1,9 @@
-import React from "react";
+import Navbar from "../Navbar/Navbar";
 
-function Header({ children }) {
-  return <div className="w-full ">{children}</div>;
+export default function Header() {
+  return (
+    <header className="w-full">
+      <Navbar />
+    </header>
+  );
 }
-
-export default Header;

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { MdOutlineCheck } from "react-icons/md";
 
 import AvatarList from "./AvatarList/AvatarList";
-import { Icon, Loading } from "../../../../common";
+import { Icon, Loading } from "../../../common";
 
-import { useFetchUserQuery, useUpdateUserMutation } from "../../../../../store";
+import { useFetchUserQuery, useUpdateUserMutation } from "../../../../store";
 
 function UpdateProfile() {
   const { data } = useFetchUserQuery();

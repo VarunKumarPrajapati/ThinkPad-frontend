@@ -6,7 +6,7 @@ import AvatarListItem from "./AvatarListItem/AvatarListItem";
 import {
   useFetchUserQuery,
   useUpdateUserMutation,
-} from "../../../../../../store";
+} from "../../../../../store";
 
 function AvatarList() {
   const { data } = useFetchUserQuery();

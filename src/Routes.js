@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 import { PropsProvider } from "./context/propsContext";
 
 import MainPage from "./pages/MainPage";
@@ -9,31 +7,20 @@ import SignupPage from "./pages/SignupPage";
 import VerificationPage from "./pages/VerificationPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 // import Playground from "./pages/Playground";
 
-import { Loader } from "./components/ui";
-import { useFetchUserQuery } from "./store";
-
 function Router() {
-  const navigate = useNavigate();
-  const { isLoading, isError } = useFetchUserQuery();
-
-  useEffect(() => {
-    if (isError) navigate("/login");
-  }, [isError, navigate]);
-
   return (
     <Routes>
       <Route
         path="/*"
         element={
-          isLoading ? (
-            <Loader loading={isLoading} />
-          ) : (
+          <ProtectedRoute>
             <PropsProvider>
               <MainPage />
             </PropsProvider>
-          )
+          </ProtectedRoute>
         }
       />
       <Route path="/login" element={<LoginPage />} />

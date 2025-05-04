@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+
 import {
   MdMenu,
   MdOutlineGridView,
@@ -9,16 +11,17 @@ import {
 } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
-import { Icon, Logo, Input, Avatar } from "../../common";
+import { Icon, Logo, Input, Avatar } from "../common";
 import ProfileToggle from "./ProfileToggle/ProfileToggle";
 
-import usePropsContext from "../../../hooks/use-propsContext";
-import { useFetchUserQuery } from "../../../store";
+import usePropsContext from "../../hooks/use-propsContext";
+import { useFetchUserQuery } from "../../store";
+import { twMerge } from "tailwind-merge";
 
 function Navbar() {
   const toggleButton = useRef(null);
   const sidebarBtnRef = useRef(null);
-
+  const noteLoading = useSelector((s) => s.notes.noteLoading);
   const {
     setIsSidebarExpanded,
     isLayoutGrid,
@@ -27,7 +30,7 @@ function Navbar() {
     setSidebarBtnRef,
   } = usePropsContext();
 
-  const { data: user, isLoading } = useFetchUserQuery();
+  const { data: user } = useFetchUserQuery();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
   const handleLayout = () => {
@@ -43,7 +46,7 @@ function Navbar() {
   }, [setSidebarBtnRef]);
 
   return (
-    <header className="w-full bg-white">
+    <nav>
       <div className="flex items-center px-3 py-2 md:border-b md:p-2 justify-evenly">
         {/* Logo and Icon only for Desktop */}
         <div className="items-center hidden pr-7 md:flex">
@@ -94,7 +97,13 @@ function Navbar() {
           </div>
 
           <div className="hidden md:flex">
-            <Icon icon={MdRefresh} className=" hover:text-black" />
+            <Icon
+              icon={MdRefresh}
+              className={twMerge(
+                "hover:text-black",
+                noteLoading && "animate-spin"
+              )}
+            />
             <Icon
               onClick={handleLayout}
               icon={isLayoutGrid ? MdOutlineGridView : MdOutlineViewAgenda}
@@ -109,11 +118,7 @@ function Navbar() {
             ref={toggleButton}
             onClick={() => setIsToggleOpen(!isToggleOpen)}
           >
-            <Avatar
-              loading={isLoading}
-              currentAvatar={user?.avatar}
-              className="size-12"
-            />
+            <Avatar currentAvatar={user?.avatar} className="size-12" />
           </button>
         </div>
 
@@ -126,7 +131,7 @@ function Navbar() {
           />
         )}
       </div>
-    </header>
+    </nav>
   );
 }
 

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 
-import Navbar from "../components/Header/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CreateNote from "../components/CreateNote/CreateNote";
 import ArchiveNotePage from "./ArchiveNotePage";
@@ -36,10 +35,7 @@ function MainPage() {
 
   return (
     <div className="flex flex-col w-screen h-screen font-roboto">
-      <Header>
-        <Navbar user={data} />
-      </Header>
-
+      <Header />
       <Sidebar>
         <CreateNote />
 

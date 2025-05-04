@@ -2,13 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const noteSlice = createSlice({
   name: "notes",
-  initialState: [],
+  initialState: {
+    userNotes: [],
+    noteLoading: false,
+  },
   reducers: {
     setNotes(state, action) {
-      return action.payload;
+      state.userNotes.push(...action.payload);
     },
     addNote(state, action) {
-      state.push(action);
+      state.userNotes.push(action.payload);
     },
   },
 });

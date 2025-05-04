@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { NoteList } from "../components/ui";
 
 export default function CommonNotePage() {
-  const notes = useSelector((state) => state.notes);
+  const notes = useSelector((state) => state.notes.userNotes);
   const { commons, pins } = {
     commons: [],
     pins: [],

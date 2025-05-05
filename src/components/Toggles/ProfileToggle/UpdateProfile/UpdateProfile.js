@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { MdOutlineCheck } from "react-icons/md";
 
-import AvatarList from "./AvatarList/AvatarList";
 import { Icon, Loading } from "../../../common";
+import AvatarList from "./AvatarList/AvatarList";
 
-import { useFetchUserQuery, useUpdateUserMutation } from "../../../../store";
+import { useUpdateUserMutation } from "../../../../store";
 
 function UpdateProfile() {
-  const { data } = useFetchUserQuery();
+  const data = useSelector((state) => state.userState.user);
   const [updateUser, { isLoading }] = useUpdateUserMutation();
   const [username, setUsername] = useState(data?.username);
 

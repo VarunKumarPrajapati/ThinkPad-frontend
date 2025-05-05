@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import {
   MdMenu,
   MdOutlineGridView,
-  MdOutlineSettings,
   MdOutlineViewAgenda,
   MdRefresh,
   MdSearch,
@@ -12,10 +11,9 @@ import {
 import { RxCross2 } from "react-icons/rx";
 
 import { Icon, Logo, Input, Avatar } from "../common";
-import ProfileToggle from "./ProfileToggle/ProfileToggle";
+import ProfileToggle from "../Toggles/ProfileToggle/ProfileToggle";
 
 import usePropsContext from "../../hooks/use-propsContext";
-import { useFetchUserQuery } from "../../store";
 import { twMerge } from "tailwind-merge";
 
 function Navbar() {
@@ -30,8 +28,7 @@ function Navbar() {
     setSidebarBtnRef,
   } = usePropsContext();
 
-  const { data: user } = useFetchUserQuery();
-  const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const user = useSelector((state) => state.userState.user);
 
   const handleLayout = () => {
     setIsLayoutGrid((prevValue) => !prevValue);
@@ -46,7 +43,7 @@ function Navbar() {
   }, [setSidebarBtnRef]);
 
   return (
-    <nav>
+    <nav className="font-poppins">
       <div className="flex items-center px-3 py-2 md:border-b md:p-2 justify-evenly">
         {/* Logo and Icon only for Desktop */}
         <div className="items-center hidden pr-7 md:flex">
@@ -56,7 +53,6 @@ function Navbar() {
           />
           <Logo />
         </div>
-
         <div className="flex items-center justify-center w-full">
           <div className="w-full md:pl-3 md:pr-8">
             <div className="flex max-w-[720px] bg-gray-100 md:rounded-lg rounded-full w-full h-full md:focus-within:bg-white md:focus-within:shadow-md">
@@ -109,27 +105,14 @@ function Navbar() {
               icon={isLayoutGrid ? MdOutlineGridView : MdOutlineViewAgenda}
               className="hover:text-black"
             />
-            <Icon icon={MdOutlineSettings} className="hover:text-black" />
           </div>
         </div>
-
-        <div className="flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">
-          <button
-            ref={toggleButton}
-            onClick={() => setIsToggleOpen(!isToggleOpen)}
-          >
+        <div className="relative flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">
+          <button ref={toggleButton}>
             <Avatar currentAvatar={user?.avatar} className="size-12" />
           </button>
+          <ProfileToggle ref={toggleButton} className="mt-4" user={user} />
         </div>
-
-        {isToggleOpen && (
-          <ProfileToggle
-            ref={toggleButton}
-            className="mt-16 mr-2"
-            user={user}
-            closeToggle={() => setIsToggleOpen(!isToggleOpen)}
-          />
-        )}
       </div>
     </nav>
   );

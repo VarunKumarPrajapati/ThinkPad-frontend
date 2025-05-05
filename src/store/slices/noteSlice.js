@@ -8,10 +8,10 @@ const noteSlice = createSlice({
   },
   reducers: {
     setNotes(state, action) {
-      state.userNotes.push(...action.payload);
+      state.userNotes = action.payload;
     },
     addNote(state, action) {
-      state.userNotes.push(action.payload);
+      state.userNotes.unshift(action.payload);
     },
   },
 });

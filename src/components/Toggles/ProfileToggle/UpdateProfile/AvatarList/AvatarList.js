@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { twMerge } from "tailwind-merge";
 
 import AvatarListItem from "./AvatarListItem/AvatarListItem";
 
-import {
-  useFetchUserQuery,
-  useUpdateUserMutation,
-} from "../../../../../store";
+import { useUpdateUserMutation } from "../../../../../store";
 
 function AvatarList() {
-  const { data } = useFetchUserQuery();
+  const data = useSelector((state) => state.userState.user);
   const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const [selectedAvatar, setSelectedAvatar] = useState(data.avatar);

@@ -6,6 +6,7 @@ import { userApi } from "./apis/userApi";
 import { noteApi } from "./apis/noteApi";
 
 import { noteReducer, addNote, setNotes } from "./slices/noteSlice";
+import { userReducer, setUser, setAuthenticated } from "./slices/userSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     [noteApi.reducerPath]: noteApi.reducer,
     // Here are slices
     notes: noteReducer,
+    userState: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -38,4 +40,4 @@ export { useFetchUserQuery, useUpdateUserMutation } from "./apis/userApi";
 export { useCreateNoteMutation, useFetchNotesQuery } from "./apis/noteApi";
 
 // Exporting Actions of slices
-export { addNote, setNotes };
+export { addNote, setNotes, setUser, setAuthenticated };

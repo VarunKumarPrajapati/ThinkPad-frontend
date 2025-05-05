@@ -64,6 +64,6 @@ export const {
   useSignUpMutation,
   useVerifyEmailMutation,
   useForgotPasswordMutation,
-  useResetPasswordMutation
+  useResetPasswordMutation,
 } = authApi;
 export { authApi };

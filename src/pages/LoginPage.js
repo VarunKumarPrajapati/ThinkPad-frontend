@@ -36,7 +36,11 @@ export default function LoginPage() {
       navigate("/");
     }
 
-    if (isError) toast.error(error?.data?.message);
+    if (isError) {
+      if (error.code === 504) {
+        toast.info("Due to vercel problem. Please login one more time please");
+      } else toast.error(error?.data?.message);
+    }
   }, [isSuccess, isError, error, navigate]);
 
   return (
@@ -97,11 +101,7 @@ export default function LoginPage() {
                 </Link>
               </div>
 
-              <Button
-                type="submit"
-                loading={isLoading}
-                className="w-full"
-              >
+              <Button type="submit" loading={isLoading} className="w-full">
                 Login
               </Button>
             </form>

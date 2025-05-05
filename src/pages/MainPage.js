@@ -1,23 +1,16 @@
-import React, { useEffect } from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 
+import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CreateNote from "../components/CreateNote/CreateNote";
 import ArchiveNotePage from "./ArchiveNotePage";
 import CommonNotePage from "./CommonNotePage";
 
 import usePropsContext from "../hooks/use-propsContext";
-import { useFetchUserQuery } from "../store";
-import Header from "../components/Header/Header";
 
 function MainPage() {
-  const navigate = useNavigate();
-  const { data, error } = useFetchUserQuery();
   const { setIsMobile } = usePropsContext();
-
-  useEffect(() => {
-    if (error?.status === 401) navigate("/login");
-  }, [data, navigate, error]);
 
   useEffect(() => {
     if (window.innerWidth < 768) setIsMobile(true);

@@ -1,2 +1,3 @@
 import SettingToggle from "./SettingToggle";
-export { SettingToggle };
+import NoteOptionToggle from "./NoteOptionsToggle";
+export { SettingToggle, NoteOptionToggle };

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const noteApi = createApi({
-  reducerPath: "note",
+  reducerPath: "notesApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASEURL + "/api/notes",
     credentials: "include",
@@ -10,7 +10,7 @@ const noteApi = createApi({
   endpoints: (builder) => {
     return {
       fetchNotes: builder.query({
-        providesTags: ["NOTE"],
+        // providesTags: ["NOTE"],
         query: () => ({
           url: "/",
           method: "GET",
@@ -19,11 +19,26 @@ const noteApi = createApi({
       }),
 
       createNote: builder.mutation({
-        invalidatesTags: ["NOTE"],
+        // invalidatesTags: ["NOTE"],
         query: (data) => ({
           url: "/create",
           method: "POST",
           body: data,
+        }),
+      }),
+
+      updateNote: builder.mutation({
+        query: ({ _id, ...data }) => ({
+          url: `/update/${_id}`,
+          method: "PATCH",
+          body: data,
+        }),
+      }),
+
+      deleteNote: builder.mutation({
+        query: (_id) => ({
+          method: "DELETE",
+          url: `/delete/${_id}`,
         }),
       }),
     };
@@ -31,4 +46,8 @@ const noteApi = createApi({
 });
 
 export { noteApi };
-export const { useCreateNoteMutation, useFetchNotesQuery } = noteApi;
+export const {
+  useCreateNoteMutation,
+  useFetchNotesQuery,
+  useUpdateNoteMutation,
+} = noteApi;

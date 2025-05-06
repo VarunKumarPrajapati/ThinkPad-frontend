@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { NoteList } from "../components/ui";
 
 export default function CommonNotePage() {
-  const notes = useSelector((state) => state.notes.userNotes);
+  const notes = useSelector((state) => state.notes.localNotes);
   const { commons, pins } = {
     commons: [],
     pins: [],
@@ -10,7 +10,7 @@ export default function CommonNotePage() {
 
   notes.forEach((note) => {
     if (note.isPinned) pins.push(note);
-    if (!note.isArchived) commons.push(note);
+    if (!note.isArchive && !note.isPinned) commons.push(note);
   });
 
   return (

@@ -1,15 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { RiPushpin2Line, RiPushpin2Fill } from "react-icons/ri";
 
 import { Icon, Input, TextArea } from "../../common";
 import CreateNoteFeatures from "../Features/DesktopCreateNoteFeatures";
 
 import useCreateNoteContext from "../../../hooks/use-createNoteContext";
-import { useCreateNoteMutation } from "../../../store";
+import { addNoteLocal } from "../../../store";
 
 function CreateNote() {
   const noteRef = useRef(null);
-  const [createNote] = useCreateNoteMutation();
+  const dispatch = useDispatch();
 
   const { colors, isCreatingNote, note, setCreatingNote, setNote } =
     useCreateNoteContext();
@@ -36,7 +37,7 @@ function CreateNote() {
     const handleBlur = (e) => {
       if (noteRef.current && !noteRef.current.contains(e.target)) {
         if (note.content.length || note.title.length) {
-          createNote(note);
+          dispatch(addNoteLocal(note));
         }
 
         setNote({
@@ -54,7 +55,7 @@ function CreateNote() {
     document.addEventListener("click", handleBlur);
 
     return () => document.removeEventListener("click", handleBlur);
-  }, [note, setNote, createNote, setCreatingNote]);
+  }, [note, setNote, setCreatingNote, dispatch]);
 
   return (
     <div

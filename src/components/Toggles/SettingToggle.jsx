@@ -4,7 +4,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 import BaseToggle from "../ui/BaseToggle";
 
-const SettingToggle = forwardRef(({}, ref) => {
+const SettingToggle = forwardRef((props, ref) => {
   const list = [
     {
       href: "https://www.linkedin.com/in/varunkumarprajapati",

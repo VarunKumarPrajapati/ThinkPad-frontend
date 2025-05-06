@@ -13,6 +13,18 @@ module.exports = {
         "Icon-1": "rgba(32,33,36,0.81)",
         "active-icon-color": "rgb(254,239,195)",
         "transparent-1": "rgba(0,0,0,0.4)",
+        Coral: "rgb(250,175,168)",
+        Peach: "rgb(243,159,118)",
+        Sand: "rgb(255,248,184)",
+        Mint: "rgb(226,246,211)",
+        Sage: "rgb(180,221,211)",
+        Fog: "rgb(212,228,237)",
+        Storm: "rgb(174,204,220)",
+        Duck: "rgb(211,191,219)",
+        Blossom: "rgb(246,226,221)",
+        Clay: "rgb(233,227,212)",
+        Chalk: "rgb(239,239,241)",
+        Default: "rgb(255,255,255)",
       },
 
       fontFamily: {

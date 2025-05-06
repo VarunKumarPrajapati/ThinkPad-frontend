@@ -5,8 +5,16 @@ import { authApi } from "./apis/authApi";
 import { userApi } from "./apis/userApi";
 import { noteApi } from "./apis/noteApi";
 
-import { noteReducer, addNote, setNotes } from "./slices/noteSlice";
+import {
+  noteReducer,
+  addNoteLocal,
+  setNotes,
+  updateNoteLocal,
+  deleteNoteLocal,
+} from "./slices/noteSlice";
 import { userReducer, setUser, setAuthenticated } from "./slices/userSlice";
+
+import notesSyncMiddleware from "./middleware/notesSync";
 
 export const store = configureStore({
   reducer: {
@@ -22,7 +30,7 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(authApi.middleware)
       .concat(userApi.middleware)
-      .concat(noteApi.middleware),
+      .concat(noteApi.middleware, notesSyncMiddleware),
 });
 
 setupListeners(store.dispatch);
@@ -37,7 +45,18 @@ export {
   useResetPasswordMutation,
 } from "./apis/authApi";
 export { useFetchUserQuery, useUpdateUserMutation } from "./apis/userApi";
-export { useCreateNoteMutation, useFetchNotesQuery } from "./apis/noteApi";
+export {
+  useCreateNoteMutation,
+  useFetchNotesQuery,
+  useUpdateNoteMutation,
+} from "./apis/noteApi";
 
 // Exporting Actions of slices
-export { addNote, setNotes, setUser, setAuthenticated };
+export {
+  addNoteLocal,
+  setNotes,
+  updateNoteLocal,
+  deleteNoteLocal,
+  setUser,
+  setAuthenticated,
+};

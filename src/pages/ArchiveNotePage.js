@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { NoteList } from "../components/ui";
 
 function ArchiveNotePage() {
-  const notes = useSelector((state) => state.notes.userNotes);
-  const archives = notes.filter((note) => note.isArchive);
+  const notes = useSelector((state) => state.notes.localNotes);
+  const archives = notes.filter((note) => note.isArchive && !note.isPinned);
 
   return (
     <div className="flex flex-col w-full h-full px-4">

@@ -1,32 +1,25 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { toast, Slide } from "react-toastify";
 import {
-  MdArchive,
   MdOutlineArchive,
   MdOutlinePalette,
+  MdOutlineUnarchive,
   // MdOutlineMoreVert,
   // MdOutlineAddAlert,
   // MdOutlinePersonAddAlt,
   // MdOutlineImage,
 } from "react-icons/md";
 
-import Icon from "../../common/Icon";
-import Button from "../../common/Button";
-import MoreToggle from "../DesktopCreateNote/Toggles/MoreToggle";
-import BackgroundToggle from "../DesktopCreateNote/Toggles/BackgroundToggle";
+import { Icon, Button } from "../../common";
+// import MoreToggle from "../DesktopCreateNote/Toggles/MoreToggle";
 // import ReminderToggle from "./ReminderToggle";
 
 import useCreateNoteContext from "../../../hooks/use-createNoteContext";
+import { ColorPalette } from "../../Toggles";
 
 function CreateNoteFeatures() {
-  const toggleRef = useRef(null);
-  const {
-    note,
-    setNote,
-    toggle,
-    setToggle,
-    setCreatingNote,
-  } = useCreateNoteContext();
+  const colorPaletteRef = useRef(null);
+  const { note, setNote, setCreatingNote } = useCreateNoteContext();
 
   const handleArchiveNote = (e) => {
     e.stopPropagation();
@@ -47,42 +40,31 @@ function CreateNoteFeatures() {
     });
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (toggleRef.current && !toggleRef.current.contains(e.target)) {
-        setToggle(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [setToggle]);
-
   return (
-    <div ref={toggleRef} className="relative flex flex-row w-full my-1">
-      <div className="w-full *:p-2 *:mx-2 inline-flex *:text-Icon-1">
+    <div className="inline-flex w-full my-1">
+      <div className="inline-flex w-full">
         {/* <Icon
-          size="18"
+          size="18" 
           icon={MdOutlineAddAlert}
           onClick={() => setToggle("ReminderToggle")}
         /> */}
 
         {/* <Icon size="18" icon={MdOutlinePersonAddAlt} /> */}
 
-        <Icon
-          size="18"
-          icon={MdOutlinePalette}
-          onClick={() => setToggle("BackgroundToggle")}
-        />
+        <div className="relative">
+          <Icon size="18" icon={MdOutlinePalette} ref={colorPaletteRef} />
+          <ColorPalette
+            ref={colorPaletteRef}
+            onClick={(color) => setNote((prev) => ({ ...prev, color }))}
+            className="top-11"
+          />
+        </div>
 
         {/* <Icon size="18" icon={MdOutlineImage} /> */}
 
         <Icon
           size="18"
-          icon={note.isArchive ? MdArchive : MdOutlineArchive}
+          icon={note.isArchive ? MdOutlineArchive : MdOutlineUnarchive}
           onClick={handleArchiveNote}
         />
 
@@ -94,17 +76,13 @@ function CreateNoteFeatures() {
       </div>
 
       <Button
-        onClick={() => {
-          setCreatingNote(false);
-          setToggle("none");
-        }}
-        className="px-6 py-1 mr-4 font-sans text-sm font-semibold border-0 text-Icon-1 bg-inherit hover:bg-gray-100"
+        onClick={() => setCreatingNote(false)}
+        className="px-6 mr-4 font-sans !text-sm font-semibold border-0 text-Icon-1 bg-inherit hover:bg-gray-100"
       >
         Close
       </Button>
 
-      {toggle === "MoreToggle" && <MoreToggle />}
-      {toggle === "BackgroundToggle" && <BackgroundToggle />}
+      {/* {toggle === "MoreToggle" && <MoreToggle />} */}
       {/* {toggle === "ReminderToggle" && <ReminderToggle />} */}
     </div>
   );

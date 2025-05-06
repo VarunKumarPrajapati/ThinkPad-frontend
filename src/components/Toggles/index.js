@@ -1,3 +1,4 @@
 import SettingToggle from "./SettingToggle";
 import NoteOptionToggle from "./NoteOptionsToggle";
-export { SettingToggle, NoteOptionToggle };
+import ColorPalette from "./ColorPalette/ColorPalette";
+export { SettingToggle, NoteOptionToggle, ColorPalette };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useRef } from "react";
 import {
   MdArrowBack,
   MdArchive,
@@ -8,28 +8,26 @@ import {
 import { RiPushpin2Line, RiPushpin2Fill } from "react-icons/ri";
 
 import { Icon, Button, TextArea } from "../../../../common";
-import ColorPalette from "../../../Features/ColorPalette/ColorPalette";
+import { ColorPalette } from "../../../../Toggles";
 
 import useCreateNoteContext from "../../../../../hooks/use-createNoteContext";
-import { useCreateNoteMutation } from "../../../../../store/index";
+
+import { addNoteLocal } from "../../../../../store";
+import { useDispatch } from "react-redux";
 
 function Text() {
+  const dispatch = useDispatch();
+  const colorPaletteRef = useRef(null);
   const { note, setNote, colors, setModeWorkspace } = useCreateNoteContext();
-  const [createNote] = useCreateNoteMutation();
-  const [colorPalette, setColorPalette] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNote({ ...note, [name]: value });
   };
 
-  const handleColorPalette = () => {
-    setColorPalette(!colorPalette);
-  };
-
   const handleSubmit = () => {
     if (!(note.title.length === 0) || !(note.content.length === 0)) {
-      createNote(note);
+      dispatch(addNoteLocal(note));
       handleClose();
     }
   };
@@ -46,7 +44,7 @@ function Text() {
   };
   return (
     <div
-      className="absolute inset-0 z-50 p-4 overflow-hidden transition-colors bg-white"
+      className="fixed inset-0 z-50 p-4 overflow-hidden transition-colors bg-white"
       style={{
         backgroundColor: colors.find((color) => color.name === note.color).code,
       }}
@@ -93,16 +91,25 @@ function Text() {
         />
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 flex px-4 py-2 pl-4 pr-1">
-        {colorPalette && (
-          <div className="fixed inset-x-0 w-full px-4 bottom-14 animate-bottomUp">
-            <ColorPalette />
-          </div>
-        )}
-        <div className="flex items-center w-full ">
-          <MdOutlinePalette size={26} onClick={handleColorPalette} />
+      <div className="fixed inset-x-0 bottom-0 flex py-2 pl-4 pr-1">
+        <div className="flex-1">
+          <Icon icon={MdOutlinePalette} size={26} ref={colorPaletteRef} />
+          <ColorPalette
+            ref={colorPaletteRef}
+            onClick={(color) => {
+              const e = {};
+              e.target = { name: "color", value: color };
+              handleChange(e);
+            }}
+            className="inset-x-2 -top-16 "
+          />
         </div>
-        <Button onClick={handleSubmit}>Save</Button>
+        <Button
+          onClick={handleSubmit}
+          className="px-8 font-semibold rounded-xl"
+        >
+          Save
+        </Button>
       </div>
     </div>
   );

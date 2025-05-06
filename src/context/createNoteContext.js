@@ -5,7 +5,6 @@ const CreateNoteContext = createContext();
 function CreateNoteProvider({ children }) {
   const [modeWorkspace, setModeWorkspace] = useState("none");
   const [isCreatingNote, setCreatingNote] = useState(false);
-  const [toggle, setToggle] = useState("none");
   const [note, setNote] = useState({
     title: "",
     content: "",
@@ -15,7 +14,7 @@ function CreateNoteProvider({ children }) {
   });
 
   const colors = [
-    { name: "Default", code: "white" },
+    { name: "Default", code: "rgb(255,255,255)" },
     { name: "Coral", code: "rgb(250,175,168)" },
     { name: "Peach", code: "rgb(243,159,118)" },
     { name: "Sand", code: "rgb(255,248,184)" },
@@ -34,8 +33,6 @@ function CreateNoteProvider({ children }) {
     setModeWorkspace,
     isCreatingNote,
     setCreatingNote,
-    toggle,
-    setToggle,
     note,
     setNote,
     colors,

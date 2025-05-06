@@ -14,12 +14,13 @@ import {
 } from "react-icons/md";
 
 import Icon from "./Icon";
-import { NoteOptionToggle } from "../Toggles";
+import { NoteOptionToggle, ColorPalette } from "../Toggles";
 
 import { updateNoteLocal } from "../../store";
 
 function Note({ note }) {
   const optionRef = useRef(null);
+  const colorPaletteRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -36,7 +37,7 @@ function Note({ note }) {
     <div
       style={{ backgroundColor: colors[note.color] }}
       className={twMerge(
-        "group select-none relative cursor-pointer border border-gray-300 rounded-lg min-w-60 w-60 max-w-60 h-fit",
+        "group select-none relative cursor-pointer border border-gray-300 rounded-lg w-full h-full",
         "flex flex-col items-center justify-between transition-colors duration-200 hover:shadow-1"
       )}
     >
@@ -61,7 +62,14 @@ function Note({ note }) {
       </div>
 
       <div className="flex items-center h-8 my-1 *:group-hover:block *:hidden">
-        <Icon icon={MdOutlinePalette} size="18" />
+        <div className="relative">
+          <Icon icon={MdOutlinePalette} size="18" ref={colorPaletteRef} />
+          <ColorPalette
+            ref={colorPaletteRef}
+            defaultColor={note.color}
+            onClick={(color) => handleChange({ color })}
+          />
+        </div>
         <Icon
           icon={note.isArchive ? MdOutlineUnarchive : MdOutlineArchive}
           size="18"

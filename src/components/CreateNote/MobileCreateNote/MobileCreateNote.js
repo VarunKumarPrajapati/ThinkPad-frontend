@@ -14,7 +14,7 @@ function MobileCreateNote() {
     <>
       <div
         className={twMerge(
-          "fixed bottom-0 right-0 p-2",
+          "fixed bottom-0 right-0 p-2 z-50",
           isCreatingNote &&
             "bg-gray-400 bg-opacity-5 inset-0 z-50 flex items-end justify-end"
         )}

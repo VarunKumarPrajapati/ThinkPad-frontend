@@ -17,7 +17,10 @@ const BaseToggle = forwardRef(({ children, className }, ref) => {
   return (
     <>
       {isOpen && (
-        <span ref={toggleRef} className={twMerge("absolute shadow-1 bg-white z-50", className)}>
+        <span
+          ref={toggleRef}
+          className={twMerge("absolute shadow-1 bg-white z-50", className)}
+        >
           {children}
         </span>
       )}

@@ -37,13 +37,14 @@ function Note({ note }) {
     <div
       style={{ backgroundColor: colors[note.color] }}
       className={twMerge(
-        "group select-none relative cursor-pointer border border-gray-300 rounded-lg w-full h-full",
-        "flex flex-col items-center justify-between transition-colors duration-200 hover:shadow-1"
+        "group select-none relative cursor-pointer border border-gray-300 rounded-lg mb-2 break-inside-avoid",
+        "flex flex-col items-center justify-between transition-colors duration-200 md:hover:shadow-1",
+        note.color !== "Default" && "border-0"
       )}
     >
       <Icon
         icon={note.isPinned ? RiPushpin2Fill : RiPushpin2Line}
-        className="absolute p-2 text-base top-1.5 right-1.5 text-Icon-1 group-hover:block hidden"
+        className="absolute p-2 text-base top-1.5 right-1.5 text-Icon-1 md:group-hover:block hidden"
         size="20"
         onClick={() =>
           handleChange({ isPinned: !note.isPinned, isArchive: false })
@@ -61,7 +62,7 @@ function Note({ note }) {
         </div>
       </div>
 
-      <div className="flex items-center h-8 my-1 *:group-hover:block *:hidden">
+      <div className="flex items-center h-8 my-1 md:*:group-hover:block *:hidden">
         <div className="relative">
           <Icon icon={MdOutlinePalette} size="18" ref={colorPaletteRef} />
           <ColorPalette

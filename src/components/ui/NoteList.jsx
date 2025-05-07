@@ -5,7 +5,7 @@ export default function NoteList({ label, notes = [] }) {
   return (
     <div className="flex flex-col mb-4 gap-y-2">
       {!!notes.length && label && <div className="text-sm">{label}</div>}
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="gap-4 p-4 columns-2 md:columns-2 lg:columns-3 xl:columns-4">
         {renderList}
       </div>
     </div>

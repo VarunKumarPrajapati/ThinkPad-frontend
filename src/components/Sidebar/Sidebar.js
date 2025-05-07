@@ -41,15 +41,13 @@ function Sidebar({ children }) {
   return (
     <>
       <div className="relative flex flex-row w-full h-full overflow-hidden font-poppins">
-        {isSidebarExpanded && (
-          <aside className="flex-shrink-0 hidden w-64 pt-2 select-none md:block ">
-            <div className="flex flex-col items-start justify-center w-full">
-              {path.map((item) => (
-                <SidebarItem key={item.label} {...item} />
-              ))}
-            </div>
-          </aside>
-        )}
+        <aside className="flex-shrink-0 hidden w-64 pt-2 select-none md:block ">
+          <div className="flex flex-col items-start justify-center w-full">
+            {path.map((item) => (
+              <SidebarItem key={item.label} {...item} />
+            ))}
+          </div>
+        </aside>
 
         <div className="flex-1 w-full h-full overflow-y-auto">{children}</div>
       </div>

@@ -1,4 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+
+import { noteApi } from "../apis/noteApi";
 import { findIndexById } from "../../utils/arrayUtils";
 
 const noteSlice = createSlice({
@@ -6,6 +8,7 @@ const noteSlice = createSlice({
   initialState: {
     localNotes: [],
     loading: false,
+    error: false,
   },
   reducers: {
     setNotes(state, action) {
@@ -25,9 +28,57 @@ const noteSlice = createSlice({
       const index = findIndexById(state.localNotes, _id);
       if (index !== -1) state.localNotes.splice(index, 1);
     },
+    setNoteError(state, action) {
+      state.error = action.payload;
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        isAnyOf(
+          noteApi.endpoints.createNote.matchPending,
+          noteApi.endpoints.updateNote.matchPending,
+          noteApi.endpoints.deleteNote.matchPending,
+          noteApi.endpoints.fetchNotes.matchPending
+        ),
+        (state) => {
+          state.loading = true;
+          state.error = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          noteApi.endpoints.createNote.matchFulfilled,
+          noteApi.endpoints.updateNote.matchFulfilled,
+          noteApi.endpoints.deleteNote.matchFulfilled,
+          noteApi.endpoints.fetchNotes.matchFulfilled
+        ),
+        (state, action) => {
+          state.loading = false;
+          state.error = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          noteApi.endpoints.createNote.matchRejected,
+          noteApi.endpoints.updateNote.matchRejected,
+          noteApi.endpoints.deleteNote.matchRejected,
+          noteApi.endpoints.fetchNotes.matchRejected
+        ),
+        (state, action) => {
+          state.loading = false;
+          state.error = true;
+        }
+      );
   },
 });
 
 export const noteReducer = noteSlice.reducer;
-export const { setNotes, addNoteLocal, updateNoteLocal, deleteNoteLocal } =
-  noteSlice.actions;
+export const {
+  setNotes,
+  addNoteLocal,
+  updateNoteLocal,
+  deleteNoteLocal,
+  setNoteError,
+} = noteSlice.actions;

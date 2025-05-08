@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
@@ -8,8 +10,10 @@ import ArchiveNotePage from "./ArchiveNotePage";
 import CommonNotePage from "./CommonNotePage";
 
 import usePropsContext from "../hooks/use-propsContext";
+import { setNoteError } from "../store";
 
 function MainPage() {
+  const dispatch = useDispatch();
   const { setIsMobile } = usePropsContext();
 
   useEffect(() => {
@@ -26,6 +30,15 @@ function MainPage() {
     };
   }, [setIsMobile]);
 
+  const { localNotes, error } = useSelector((state) => state.notes);
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Something went wrong & rolling back");
+      dispatch(setNoteError(null));
+    }
+  }, [error, dispatch]);
+
   return (
     <div className="flex flex-col w-screen h-screen font-roboto">
       <Header />
@@ -33,8 +46,11 @@ function MainPage() {
         <CreateNote />
 
         <Routes>
-          <Route path="/" element={<CommonNotePage />} />
-          <Route path="/archive" element={<ArchiveNotePage />} />
+          <Route path="/" element={<CommonNotePage notes={localNotes} />} />
+          <Route
+            path="/archive"
+            element={<ArchiveNotePage notes={localNotes} />}
+          />
         </Routes>
       </Sidebar>
     </div>

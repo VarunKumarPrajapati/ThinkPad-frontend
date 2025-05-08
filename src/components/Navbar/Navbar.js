@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 
 import {
   MdMenu,
-  MdOutlineGridView,
-  MdOutlineViewAgenda,
+  // MdOutlineGridView,
+  // MdOutlineViewAgenda,
   MdRefresh,
   MdSearch,
 } from "react-icons/md";
@@ -19,20 +19,20 @@ import { twMerge } from "tailwind-merge";
 function Navbar() {
   const toggleButton = useRef(null);
   const sidebarBtnRef = useRef(null);
-  const noteLoading = useSelector((s) => s.notes.noteLoading);
+  const noteLoading = useSelector((s) => s.notes.loading);
   const {
     setIsSidebarExpanded,
-    isLayoutGrid,
-    setIsLayoutGrid,
+    // isLayoutGrid,
+    // setIsLayoutGrid,
 
     setSidebarBtnRef,
   } = usePropsContext();
 
   const user = useSelector((state) => state.userState.user);
 
-  const handleLayout = () => {
-    setIsLayoutGrid((prevValue) => !prevValue);
-  };
+  // const handleLayout = () => {
+  //   setIsLayoutGrid((prevValue) => !prevValue);
+  // };
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -84,11 +84,11 @@ function Navbar() {
                 }
               />
 
-              <Icon
+              {/* <Icon
                 onClick={handleLayout}
                 icon={isLayoutGrid ? MdOutlineGridView : MdOutlineViewAgenda}
                 className="hover:text-black md:hidden"
-              />
+              /> */}
             </div>
           </div>
 
@@ -100,11 +100,11 @@ function Navbar() {
                 noteLoading && "animate-spin"
               )}
             />
-            <Icon
+            {/* <Icon
               onClick={handleLayout}
               icon={isLayoutGrid ? MdOutlineGridView : MdOutlineViewAgenda}
               className="hover:text-black"
-            />
+            /> */}
           </div>
         </div>
         <div className="relative flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">

@@ -1,8 +1,6 @@
-import { useSelector } from "react-redux";
 import { NoteList } from "../components/ui";
 
-function ArchiveNotePage() {
-  const notes = useSelector((state) => state.notes.localNotes);
+function ArchiveNotePage({ notes }) {
   const archives = notes.filter((note) => note.isArchive && !note.isPinned);
 
   return (

@@ -11,6 +11,7 @@ import {
   setNotes,
   updateNoteLocal,
   deleteNoteLocal,
+  setNoteError,
 } from "./slices/noteSlice";
 import { userReducer, setUser, setAuthenticated } from "./slices/userSlice";
 
@@ -59,4 +60,5 @@ export {
   deleteNoteLocal,
   setUser,
   setAuthenticated,
+  setNoteError,
 };

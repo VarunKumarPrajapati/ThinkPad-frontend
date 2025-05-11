@@ -10,14 +10,13 @@ import {
 } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
-import { Icon, Logo, Input, Avatar } from "../common";
+import { Icon, Logo, Input } from "../common";
 import ProfileToggle from "../Toggles/ProfileToggle/ProfileToggle";
 
 import usePropsContext from "../../hooks/use-propsContext";
 import { twMerge } from "tailwind-merge";
 
 function Navbar() {
-  const toggleButton = useRef(null);
   const sidebarBtnRef = useRef(null);
   const noteLoading = useSelector((s) => s.notes.loading);
   const {
@@ -108,10 +107,7 @@ function Navbar() {
           </div>
         </div>
         <div className="relative flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">
-          <button ref={toggleButton}>
-            <Avatar currentAvatar={user?.avatar} className="size-12" />
-          </button>
-          <ProfileToggle ref={toggleButton} className="mt-4" user={user} />
+          <ProfileToggle className="mt-4" user={user} />
         </div>
       </div>
     </nav>

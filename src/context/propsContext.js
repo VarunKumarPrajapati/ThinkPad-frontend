@@ -7,7 +7,8 @@ function PropsProvider({ children }) {
   const [isLayoutGrid, setIsLayoutGrid] = useState(true);
   const [sidebarBtnRef, setSidebarBtnRef] = useState(null);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
-
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
   const props = {
     isMobile,
     setIsMobile,
@@ -17,6 +18,10 @@ function PropsProvider({ children }) {
     setIsSidebarExpanded,
     sidebarBtnRef,
     setSidebarBtnRef,
+    modalVisibility,
+    setModalVisibility,
+    selectedNote,
+    setSelectedNote,
   };
 
   return (

@@ -7,7 +7,7 @@ export default function CommonNotePage({ notes }) {
   };
 
   notes.forEach((note) => {
-    if (note.isPinned) pins.push(note);
+    if (note.isPinned && !note.isArchive) pins.push(note);
     if (!note.isArchive && !note.isPinned) commons.push(note);
   });
 

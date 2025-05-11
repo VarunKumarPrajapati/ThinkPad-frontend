@@ -15,6 +15,8 @@ function App() {
         pauseOnHover
         theme="colored"
         transition={Bounce}
+        limit={2}
+        className="text-sm px-4 py-2 max-w-[90vw] md:text-base md:px-6 md:py-3 md:max-w-full"
       />
       <Routes />
     </BrowserRouter>

@@ -2,9 +2,10 @@ import React, { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 const Icon = forwardRef(
-  ({ plain, className, icon: Icon, size = 24, ...rest }, ref) => {
+  ({ plain, className, icon: Icon, size = 24, name, ...rest }, ref) => {
     return (
       <button
+        title={name}
         ref={ref}
         className={twMerge(
           "flex justify-center items-center",

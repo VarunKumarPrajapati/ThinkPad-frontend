@@ -1,8 +1,6 @@
-import React, { useRef } from "react";
 import { toast, Slide } from "react-toastify";
 import {
   MdOutlineArchive,
-  MdOutlinePalette,
   MdOutlineUnarchive,
   // MdOutlineMoreVert,
   // MdOutlineAddAlert,
@@ -15,10 +13,9 @@ import { Icon, Button } from "../../common";
 // import ReminderToggle from "./ReminderToggle";
 
 import useCreateNoteContext from "../../../hooks/use-createNoteContext";
-import { ColorPalette } from "../../Toggles";
+import ColorPalette from "../../Toolbar/ToolbarItem/ColorPalette";
 
 function CreateNoteFeatures() {
-  const colorPaletteRef = useRef(null);
   const { note, setNote, setCreatingNote } = useCreateNoteContext();
 
   const handleArchiveNote = (e) => {
@@ -51,14 +48,11 @@ function CreateNoteFeatures() {
 
         {/* <Icon size="18" icon={MdOutlinePersonAddAlt} /> */}
 
-        <div className="relative">
-          <Icon size="18" icon={MdOutlinePalette} ref={colorPaletteRef} />
-          <ColorPalette
-            ref={colorPaletteRef}
-            onClick={(color) => setNote((prev) => ({ ...prev, color }))}
-            className="top-11"
-          />
-        </div>
+        <ColorPalette
+          onClick={({ target }) =>
+            setNote((prev) => ({ ...prev, [target.name]: target.value }))
+          }
+        />
 
         {/* <Icon size="18" icon={MdOutlineImage} /> */}
 

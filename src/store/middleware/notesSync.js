@@ -8,7 +8,8 @@ const notesSyncMiddleware = (storeApi) => (next) => (action) => {
     storeApi.dispatch(noteApi.endpoints.createNote.initiate(action.payload));
   }
 
-  if (updateNoteLocal.match(action)) {
+  if (updateNoteLocal.match(action) && action.payload.sync) {
+    delete action.payload.sync
     storeApi.dispatch(noteApi.endpoints.updateNote.initiate(action.payload));
   }
 

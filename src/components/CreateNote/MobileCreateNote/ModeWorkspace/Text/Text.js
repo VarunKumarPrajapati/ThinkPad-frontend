@@ -1,24 +1,16 @@
-import { useRef } from "react";
-import {
-  MdArrowBack,
-  MdArchive,
-  MdOutlineArchive,
-  MdOutlinePalette,
-} from "react-icons/md";
-import { RiPushpin2Line, RiPushpin2Fill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { MdArrowBack } from "react-icons/md";
 
-import { Icon, Button, TextArea } from "../../../../common";
-import { ColorPalette } from "../../../../Toggles";
+import { Button, TextArea, Input } from "../../../../common";
+import { Archive, Pin, ColorPalette } from "../../../../Toolbar/ToolbarItem";
 
 import useCreateNoteContext from "../../../../../hooks/use-createNoteContext";
 
 import { addNoteLocal } from "../../../../../store";
-import { useDispatch } from "react-redux";
 
 function Text() {
   const dispatch = useDispatch();
-  const colorPaletteRef = useRef(null);
-  const { note, setNote, colors, setModeWorkspace } = useCreateNoteContext();
+  const { note, setNote, setModeWorkspace } = useCreateNoteContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +18,7 @@ function Text() {
   };
 
   const handleSubmit = () => {
-    if (!(note.title.length === 0) || !(note.content.length === 0)) {
+    if (note.title.length || note.content.length) {
       dispatch(addNoteLocal(note));
       handleClose();
     }
@@ -44,9 +36,9 @@ function Text() {
   };
   return (
     <div
-      className="fixed inset-0 z-50 p-4 overflow-hidden transition-colors bg-white"
+      className="fixed inset-0 z-50 p-4 overflow-hidden transition-colors"
       style={{
-        backgroundColor: colors.find((color) => color.name === note.color).code,
+        backgroundColor: colors[note.color],
       }}
     >
       <div className="flex justify-between w-full pb-12">
@@ -54,32 +46,16 @@ function Text() {
           <MdArrowBack size={30} />
         </div>
         <div className="flex justify-between gap-x-4">
-          <Icon
-            icon={note.isPinned ? RiPushpin2Fill : RiPushpin2Line}
-            className={"p-0"}
-            size="26"
-            onClick={(e) => {
-              e.target = { name: "isPinned", value: !note.isPinned };
-              handleChange(e);
-            }}
-          />
-          <Icon
-            icon={note.isArchive ? MdArchive : MdOutlineArchive}
-            className={"p-0"}
-            size="26"
-            onClick={(e) => {
-              e.target = { name: "isArchive", value: !note.isArchive };
-              handleChange(e);
-            }}
-          />
+          <Archive onClick={handleChange} size={26} className="p-0" />
+          <Pin onClick={handleChange} size={26} className="p-0" />
         </div>
       </div>
 
       <div className="flex flex-col w-full h-full px-2 gap-y-6">
-        <TextArea
+        <Input
           name="title"
           placeholder="Title"
-          className="text-2xl"
+          className="p-0 text-2xl border-0"
           onChange={handleChange}
         />
         <TextArea
@@ -91,19 +67,8 @@ function Text() {
         />
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 flex py-2 pl-4 pr-1">
-        <div className="flex-1">
-          <Icon icon={MdOutlinePalette} size={26} ref={colorPaletteRef} />
-          <ColorPalette
-            ref={colorPaletteRef}
-            onClick={(color) => {
-              const e = {};
-              e.target = { name: "color", value: color };
-              handleChange(e);
-            }}
-            className="inset-x-2 -top-16 "
-          />
-        </div>
+      <div className="fixed inset-x-0 bottom-0 flex justify-between py-2 pl-4 pr-1">
+        <ColorPalette onClick={handleChange} size={26} />
         <Button
           onClick={handleSubmit}
           className="px-8 font-semibold rounded-xl"
@@ -116,3 +81,18 @@ function Text() {
 }
 
 export default Text;
+
+const colors = {
+  Default: "rgb(255,255,255)",
+  Coral: "rgb(250,175,168)",
+  Peach: "rgb(243,159,118)",
+  Sand: "rgb(255,248,184)",
+  Mint: "rgb(226,246,211)",
+  Sage: "rgb(180,221,211)",
+  Fog: "rgb(212,228,237)",
+  Storm: "rgb(174,204,220)",
+  Duck: "rgb(211,191,219)",
+  Blossom: "rgb(246,226,221)",
+  Clay: "rgb(233,227,212)",
+  Chalk: "rgb(239,239,241)",
+};

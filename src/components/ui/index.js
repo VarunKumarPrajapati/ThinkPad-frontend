@@ -1,4 +1,5 @@
 import NoteList from "./NoteList";
 import Loader from "./Loader";
 import BaseToggle from "./BaseToggle";
-export { NoteList, Loader, BaseToggle };
+import Modal from "./Modal";
+export { NoteList, Loader, BaseToggle, Modal };

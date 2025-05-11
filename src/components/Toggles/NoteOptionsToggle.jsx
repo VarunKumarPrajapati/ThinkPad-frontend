@@ -1,10 +1,12 @@
-import { forwardRef } from "react";
 import { useDispatch } from "react-redux";
+import { MdOutlineMoreVert } from "react-icons/md";
+
+import { BaseToggle } from "../ui";
+import { Icon } from "../common";
 
 import { deleteNoteLocal } from "../../store";
 
-import { BaseToggle } from "../ui";
-const NoteOptionToggle = forwardRef(({ note }, ref) => {
+export default function NoteOptionToggle({ note, size = 18 }) {
   const dispatch = useDispatch();
   const list = [
     {
@@ -34,12 +36,10 @@ const NoteOptionToggle = forwardRef(({ note }, ref) => {
   });
 
   return (
-    <BaseToggle ref={ref}>
-      <ul className="shadow-1 bg-white rounded-md text-[0.8125rem] py-1 font-poppins text-gray-600">
+    <BaseToggle icon={<Icon icon={MdOutlineMoreVert} size={size} />}>
+      <ul className=" bg-white rounded-md text-[0.8125rem] py-1 font-poppins text-gray-600">
         {renderList}
       </ul>
     </BaseToggle>
   );
-});
-
-export default NoteOptionToggle;
+}

@@ -11,10 +11,22 @@ import CommonNotePage from "./CommonNotePage";
 
 import usePropsContext from "../hooks/use-propsContext";
 import { setNoteError } from "../store";
+import { UpdateNoteModal } from "../components/Modals";
 
 function MainPage() {
   const dispatch = useDispatch();
-  const { setIsMobile } = usePropsContext();
+  const {
+    setIsMobile,
+    modalVisibility,
+    setModalVisibility,
+    selectedNote,
+    setSelectedNote,
+  } = usePropsContext();
+  
+  const handleModalClose = () => {
+    setModalVisibility(false);
+    setSelectedNote(null);
+  };
 
   useEffect(() => {
     if (window.innerWidth < 768) setIsMobile(true);
@@ -44,7 +56,13 @@ function MainPage() {
       <Header />
       <Sidebar>
         <CreateNote />
-
+        {selectedNote && (
+          <UpdateNoteModal
+            isOpen={modalVisibility}
+            note={selectedNote}
+            onClose={handleModalClose}
+          />
+        )}
         <Routes>
           <Route path="/" element={<CommonNotePage notes={localNotes} />} />
           <Route

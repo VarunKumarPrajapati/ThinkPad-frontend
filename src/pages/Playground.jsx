@@ -1,99 +1,69 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const Playground = () => {
-  const [notes, setNotes] = useState([
-    { id: 1, text: "This is a small note, concise and to the point." },
-    {
-      id: 2,
-      text: "Here is a big note, elaborating on various aspects in detail.",
-    },
-    {
-      id: 3,
-      text: "This note covers all sizes, blending brevity with elaboration.",
-    },
-    { id: 4, text: "Another small note, brief and succinct in its message." },
-    {
-      id: 5,
-      text: "A big note once again, diving deep into the subject matter.",
-    },
-    { id: 6, text: "This is a small note, concise and to the point." },
-    {
-      id: 7,
-      text: "Here is a big note, elaborating on various aspects in detail.",
-    },
-    {
-      id: 8,
-      text: "This note covers all sizes, blending brevity with elaboration.",
-    },
-    { id: 9, text: "Another small note, brief and succinct in its message." },
-    {
-      id: 10,
-      text: "A big note once again, diving deep into the subject matter.",
-    },
-    { id: 11, text: "This is a small note, concise and to the point." },
-    {
-      id: 12,
-      text: "Here is a big note, elaborating on various aspects in detail.",
-    },
-    {
-      id: 13,
-      text: "This note covers all sizes, blending brevity with elaboration.",
-    },
-    { id: 14, text: "Another small note, brief and succinct in its message." },
-    {
-      id: 15,
-      text: "A big note once again, diving deep into the subject matter.",
-    },
-    { id: 16, text: "This is a small note, concise and to the point." },
-    {
-      id: 17,
-      text: "Here is a big note, elaborating on various aspects in detail.",
-    },
-    { id: 24, text: "Another small note, brief and succinct in its message." },
-    {
-      id: 25,
-      text: "A big note once agaisalkjflskajflksadfjdsalkfjlksad;fsa sakfjsaljfsadlkfslkafdlkjdsajfkdsajkfjkdsalkfjlkjdsalkfjdsalkfjklsdaj;flkasjd;fladskjf;lkdsajf;lsakjdf;lksadjf;lksajf;ldsakjflkdsajflkn, diving deep into the subject matter.",
-    },
-    { id: 26, text: "This is a small note, concise and to the point." },
-    {
-      id: 27,
-      text: "Here is a big note, elaborating on various aspects in detail.",
-    },
-    {
-      id: 28,
-      text: "This note covers all sizes, blending brevity with elaboration.",
-    },
-    { id: 29, text: "Another small note, brief and succinct in its message." },
-    {
-      id: 30,
-      text: "A big note once again, diving deep into the subject matter.",
-    },
-  ]);
+const Note = ({ title, content, isExpanded, onToggle }) => {
+  return (
+    <li
+      className={`p-4 bg-white border border-gray-200 rounded-lg shadow-md cursor-pointer transition-all duration-300 ease-in-out transform ${
+        isExpanded
+          ? "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 z-50 scale-105"
+          : "hover:scale-105"
+      }`}
+      onClick={onToggle}
+    >
+      <h2 className="mb-2 text-xl font-semibold">{title}</h2>
+      <p className={`text-gray-700 ${isExpanded ? "block" : "line-clamp-2"}`}>
+        {content}
+      </p>
+    </li>
+  );
+};
 
-  const deleteNote = (id) => {
-    setNotes((prev) => prev.filter((note) => note.id !== id));
+const NoteList = ({ notes }) => {
+  const [expandedNoteId, setExpandedNoteId] = useState(null);
+
+  const handleToggleExpand = (id) => {
+    setExpandedNoteId((prevId) => (prevId === id ? null : id));
   };
 
   return (
-    <div className="p-4 columns-4">
-      <AnimatePresence>
-        {notes.map((note) => (
-          <motion.div
-            key={note.id}
-            layout
-            className="relative p-3 mb-4 text-black break-words border-2 border-black rounded-lg break-inside-avoid"
-          >
-            <button
-              onClick={() => deleteNote(note.id)}
-              className="absolute px-1.5 text-white bg-red-400 rounded-full top-2 right-2 "
-            >
-              ✕
-            </button>
-            <p>{note.text}</p>
-          </motion.div>
-        ))}
-      </AnimatePresence>
+    <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {notes.map((note) => (
+        <Note
+          key={note.id}
+          title={note.title}
+          content={note.content}
+          isExpanded={expandedNoteId === note.id}
+          onToggle={() => handleToggleExpand(note.id)}
+        />
+      ))}
+    </ul>
+  );
+};
+
+const Playground = () => {
+  const notes = [
+    {
+      id: 1,
+      title: "Meeting Notes",
+      content: "Discuss project milestones and deadlines with the team.",
+    },
+    {
+      id: 2,
+      title: "Shopping List",
+      content: "Buy milk, eggs, bread, and coffee for the week.",
+    },
+    {
+      id: 3,
+      title: "Workout Plan",
+      content: "Monday: Cardio, Wednesday: Strength training, Friday: Yoga.",
+    },
+    // Add more notes as needed
+  ];
+
+  return (
+    <div className="min-h-screen p-6 bg-gray-100">
+      <h1 className="mb-6 text-3xl font-bold text-center">Notes</h1>
+      <NoteList notes={notes} />
     </div>
   );
 };

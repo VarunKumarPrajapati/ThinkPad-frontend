@@ -18,10 +18,14 @@ const noteSlice = createSlice({
       state.localNotes.unshift(action.payload);
     },
     updateNoteLocal(state, action) {
-      const { _id, ...data } = action.payload;
+      const { _id, sync, ...data } = action.payload;
       const index = findIndexById(state.localNotes, _id);
       const note = state.localNotes[index];
       if (index !== -1) state.localNotes[index] = { ...note, ...data };
+      [state.localNotes[0], state.localNotes[index]] = [
+        state.localNotes[index],
+        state.localNotes[0],
+      ];
     },
     deleteNoteLocal(state, action) {
       const _id = action.payload;

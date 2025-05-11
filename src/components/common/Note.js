@@ -1,28 +1,36 @@
-import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { useDispatch } from "react-redux";
+import { toast, Slide } from "react-toastify";
 
-import { RiPushpin2Line, RiPushpin2Fill } from "react-icons/ri";
-import {
-  // MdOutlineImage,
-  // MdOutlineAddAlert,
-  // MdOutlinePersonAddAlt,
-  MdOutlineArchive,
-  MdOutlineMoreVert,
-  MdOutlinePalette,
-  MdOutlineUnarchive,
-} from "react-icons/md";
-
-import Icon from "./Icon";
-import { NoteOptionToggle, ColorPalette } from "../Toggles";
+import { NoteOptionToggle } from "../Toggles";
+import { Archive, ColorPalette, Pin } from "../Toolbar/ToolbarItem";
 
 import { updateNoteLocal } from "../../store";
+import { usePropsContext } from "../../hooks";
 
 function Note({ note }) {
-  const optionRef = useRef(null);
-  const colorPaletteRef = useRef(null);
+  const { setModalVisibility, setSelectedNote } = usePropsContext();
 
   const dispatch = useDispatch();
+
+  const handleClick = (e) => {
+    const { name, value } = e.target;
+    const patch = { [name]: value };
+    if (name === "isPinned" && value) patch.isArchive = !value;
+    if (name === "isArchive" && value) patch.isPinned = !value;
+
+    handleChange(patch);
+
+    if (e.message) {
+      toast.success(e.message, {
+        position: "top-center",
+        hideProgressBar: true,
+        autoClose: 2000,
+        closeButton: false,
+        transition: Slide,
+      });
+    }
+  };
 
   const handleChange = (data) => {
     const changes = {
@@ -30,58 +38,42 @@ function Note({ note }) {
       ...data,
     };
 
-    dispatch(updateNoteLocal(changes));
+    dispatch(updateNoteLocal({ ...changes, sync: true }));
+  };
+
+  const handleNoteClick = () => {
+    setSelectedNote(note);
+    setModalVisibility(true);
   };
 
   return (
     <div
       style={{ backgroundColor: colors[note.color] }}
       className={twMerge(
-        "group select-none relative cursor-pointer border border-gray-300 rounded-lg mb-2 break-inside-avoid",
-        "flex flex-col items-center justify-between transition-colors duration-200 md:hover:shadow-1",
+        "group select-none relative cursor-pointer border border-gray-300 rounded-lg break-inside-avoid",
+        "flex flex-col items-center justify-between transition-colors duration-200 md:hover:shadow-1 break-words",
         note.color !== "Default" && "border-0"
       )}
     >
-      <Icon
-        icon={note.isPinned ? RiPushpin2Fill : RiPushpin2Line}
-        className="absolute p-2 text-base top-1.5 right-1.5 text-Icon-1 md:group-hover:block hidden"
-        size="20"
-        onClick={() =>
-          handleChange({ isPinned: !note.isPinned, isArchive: false })
-        }
-      />
-
-      <div className="w-full">
-        <div>
-          {note.title && (
-            <div className="px-4 pt-3 font-medium">{note.title}</div>
-          )}
-        </div>
-        <div>
-          <div className="px-4 py-3">{note.content}</div>
-        </div>
+      <div className="w-full h-full" onClick={handleNoteClick}>
+        {note.title && (
+          <div className="px-4 pt-3 text-sm font-medium md:text-base">
+            {note.title}
+          </div>
+        )}
+        <div className="px-4 py-3 text-xs md:text-sm">{note.content}</div>
       </div>
 
       <div className="flex items-center h-8 my-1 md:*:group-hover:block *:hidden">
-        <div className="relative">
-          <Icon icon={MdOutlinePalette} size="18" ref={colorPaletteRef} />
-          <ColorPalette
-            ref={colorPaletteRef}
-            defaultColor={note.color}
-            onClick={(color) => handleChange({ color })}
-          />
-        </div>
-        <Icon
-          icon={note.isArchive ? MdOutlineUnarchive : MdOutlineArchive}
-          size="18"
-          onClick={() =>
-            handleChange({ isArchive: !note.isArchive, isPinned: false })
-          }
+        <Pin
+          isPinned={note.isPinned}
+          onClick={handleClick}
+          size={20}
+          className="absolute p-2 top-1.5 right-1.5"
         />
-        <div className="relative">
-          <Icon icon={MdOutlineMoreVert} size="18" ref={optionRef} />
-          <NoteOptionToggle ref={optionRef} note={note} />
-        </div>
+        <ColorPalette active={note.color} onClick={handleClick} />
+        <Archive isArchive={note.isArchive} onClick={handleClick} />
+        <NoteOptionToggle note={note} />
       </div>
     </div>
   );

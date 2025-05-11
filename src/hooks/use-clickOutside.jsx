@@ -6,9 +6,11 @@ export default function useClickOutside({ toggleRef, buttonRef, callback }) {
       if (
         toggleRef.current &&
         !toggleRef.current.contains(e.target) &&
+        buttonRef.current &&
         !buttonRef.current.contains(e.target)
-      )
+      ) {
         callback();
+      }
     };
 
     document.addEventListener("click", handleOutsideClick);

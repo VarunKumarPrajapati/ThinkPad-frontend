@@ -1,4 +1,4 @@
-import { useEffect, forwardRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
@@ -11,7 +11,7 @@ import UpdateProfile from "./UpdateProfile/UpdateProfile";
 
 import { useLogoutMutation } from "../../../store";
 
-const ProfileToggle = forwardRef(({ className, user }, ref) => {
+export default function ProfileToggle({ className, user }) {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const [logout, { isSuccess, isLoading, isError }] = useLogoutMutation();
@@ -21,8 +21,14 @@ const ProfileToggle = forwardRef(({ className, user }, ref) => {
     if (isError) toast.warning("Something went wrong");
   }, [isSuccess, isError, navigate]);
 
+  const icon = (
+    <button>
+      <Avatar currentAvatar={user?.avatar} className="size-12" />
+    </button>
+  );
+
   return (
-    <BaseToggle ref={ref}>
+    <BaseToggle icon={icon}>
       <div
         className={twMerge(
           "absolute top-2.5 right-0 z-50 font-poppins rounded-xl shadow-lg border flex flex-col gap-y-2 w-80 bg-gray-100 p-2",
@@ -59,5 +65,4 @@ const ProfileToggle = forwardRef(({ className, user }, ref) => {
       </div>
     </BaseToggle>
   );
-});
-export default ProfileToggle;
+}

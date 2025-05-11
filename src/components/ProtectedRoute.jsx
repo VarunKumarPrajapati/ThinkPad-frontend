@@ -9,8 +9,7 @@ export default function ProtectedRoute({ children }) {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { isLoading, isSuccess, data } = useFetchUserQuery();
-
+  let { isLoading, isSuccess, data } = useFetchUserQuery();
   useEffect(() => {
     if (isSuccess) dispatch(setUser({ user: data, isAuthenticated: true }));
   }, [isSuccess, data, dispatch]);

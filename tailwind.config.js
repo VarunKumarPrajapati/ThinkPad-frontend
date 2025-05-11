@@ -36,6 +36,8 @@ module.exports = {
         bottomUp: "bottom-up 0.3s ease-out",
         slideIn: "slideIn 0.2s ease-out",
         slideOut: "slideOut 0.2s ease-out",
+        "slide-in-top": "slide-in-top 0.3s ease-out forwards",
+        "slide-out-top": "slide-out-top 0.3s ease-in forwards",
       },
 
       keyframes: {
@@ -59,10 +61,18 @@ module.exports = {
             transform: "translateX(-240px)",
           },
         },
+
+        "slide-in-top": {
+          "0%": { transform: "translateY(-30px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+
+        "slide-out-top": {
+          "0%": { transform: "translateY(0)", opacity: "1" },
+          "100%": { transform: "translateY(-30px)", opacity: "0" },
+        },
       },
     },
   },
-  plugins: [
-    require('tailwind-scrollbar')
-  ],
+  plugins: [require("tailwind-scrollbar")],
 };

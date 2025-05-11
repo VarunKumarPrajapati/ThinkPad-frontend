@@ -1,5 +1,5 @@
-import NoteList from "./NoteList";
-import Loader from "./Loader";
-import BaseToggle from "./BaseToggle";
-import Modal from "./Modal";
-export { NoteList, Loader, BaseToggle, Modal };
+export { default as NoteList } from "./NoteList";
+export { default as Loader } from "./Loader";
+export { default as BaseToggle } from "./BaseToggle";
+export { default as Modal } from "./Modal";
+export { default as Alert } from "./Alert";

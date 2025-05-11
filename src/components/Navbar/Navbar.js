@@ -88,6 +88,14 @@ function Navbar() {
                 icon={isLayoutGrid ? MdOutlineGridView : MdOutlineViewAgenda}
                 className="hover:text-black md:hidden"
               /> */}
+
+              <Icon
+                icon={MdRefresh}
+                className={twMerge(
+                  "hover:text-black md:hidden hover:bg-transparent",
+                  noteLoading && "animate-spin"
+                )}
+              />
             </div>
           </div>
 

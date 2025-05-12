@@ -30,54 +30,50 @@ export default function ForgotPasswordPage() {
   }, [isSuccess, isError, error, navigate]);
 
   return (
-    <div className="w-screen h-screen font-poppins">
-      <div className="flex flex-col w-full h-full md:flex-row gap-x-14">
-        <div className="block w-full h-16 bg-black lg:hidden"></div>
+    <div className="flex flex-col w-full h-full md:flex-row gap-x-14">
+      <div className="block w-full h-16 bg-black lg:hidden"></div>
 
-        <div className="md:max-w-[364px] px-4 py-12 md:pr-0 md:pl-12">
-          <div className="flex justify-start">
-            <Logo className="text-4xl" />
-          </div>
-
-          <h2 className="mt-8 mb-6 font-serif text-3xl">
-            Forgot your password
-          </h2>
-          <p className="w-11/12 mt-3 mb-10 text-sm font-medium text-[#1c2d38] font-roboto ">
-            To reset your password, enter your email below and submit. An email
-            will be sent to you with instructions about how to complete the
-            process.
-          </p>
-
-          <form className="" onSubmit={handleSubmit}>
-            <Input
-              name="email"
-              label="Email Address"
-              placeholder="Enter Email"
-              onChange={handleChange}
-              autoComplete="email"
-              value={value}
-            />
-
-            <footer className="mt-2.5">
-              <Button
-                className="w-full"
-                type="submit"
-                loading={isLoading}
-                disabled={!value.length}
-              >
-                Reset Password
-              </Button>
-            </footer>
-          </form>
+      <div className="md:max-w-[364px] px-4 py-12 md:pr-0 md:pl-12">
+        <div className="flex justify-start">
+          <Logo className="text-4xl" />
         </div>
 
-        <div className="hidden md:flex-1 md:block">
-          <img
-            src="https://assets.mongodb-cdn.com/mms/static/images/auth/login_desktop.svg"
-            alt="bg"
-            className="object-cover w-full h-full"
+        <h2 className="mt-8 mb-6 font-serif text-3xl">Forgot your password</h2>
+        <p className="w-11/12 mt-3 mb-10 text-sm font-medium text-[#1c2d38] font-roboto ">
+          To reset your password, enter your email below and submit. An email
+          will be sent to you with instructions about how to complete the
+          process.
+        </p>
+
+        <form className="" onSubmit={handleSubmit}>
+          <Input
+            name="email"
+            label="Email Address"
+            placeholder="Enter Email"
+            onChange={handleChange}
+            autoComplete="email"
+            value={value}
           />
-        </div>
+
+          <footer className="mt-2.5">
+            <Button
+              className="w-full"
+              type="submit"
+              loading={isLoading}
+              disabled={!value.length}
+            >
+              Reset Password
+            </Button>
+          </footer>
+        </form>
+      </div>
+
+      <div className="hidden md:flex-1 md:block">
+        <img
+          src="https://assets.mongodb-cdn.com/mms/static/images/auth/login_desktop.svg"
+          alt="bg"
+          className="object-cover w-full h-full"
+        />
       </div>
     </div>
   );

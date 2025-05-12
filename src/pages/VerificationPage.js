@@ -26,12 +26,10 @@ export default function VerificationPage() {
   }
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
-      <div className="w-10/12 px-3 py-4 border-4 border-black rounded-xl">
-        <h1 className="text-2xl font-bold">Email Verification</h1>
-        <div>{message}</div>
-        {isSuccess && <div>Redirecting...</div>}
-      </div>
+    <div className="w-10/12 px-3 py-4 border-4 border-black rounded-xl">
+      <h1 className="text-2xl font-bold">Email Verification</h1>
+      <div>{message}</div>
+      {isSuccess && <div>Redirecting...</div>}
     </div>
   );
 }

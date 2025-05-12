@@ -115,7 +115,7 @@ function Navbar() {
           </div>
         </div>
         <div className="relative flex items-center justify-center pl-2 select-none md:pr-1 md:pl-8">
-          <ProfileToggle className="mt-4" user={user} />
+          <ProfileToggle user={user} />
         </div>
       </div>
     </nav>

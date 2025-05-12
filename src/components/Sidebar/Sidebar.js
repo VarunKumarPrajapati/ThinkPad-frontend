@@ -8,20 +8,20 @@ import SidebarItem from "./SidebarItem/SidebarItem";
 import usePropsContext from "../../hooks/use-propsContext";
 
 function Sidebar({ children }) {
+  const { pathname } = useLocation();
   const { isMobile, isSidebarExpanded } = usePropsContext();
-
   const path = [
     {
       label: "Notes",
       icon: MdLightbulbOutline,
       href: "/",
-      active: useLocation().pathname === "/",
+      active: pathname === "/" || pathname === "/search",
     },
     {
       label: "Archive",
       icon: MdOutlineArchive,
       href: "/archive",
-      active: useLocation().pathname === "/archive",
+      active: pathname === "/archive",
     },
     // Have to be add in future...
     // {

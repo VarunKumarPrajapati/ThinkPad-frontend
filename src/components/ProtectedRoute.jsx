@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Loader } from "./ui";
-import { useFetchUserQuery, setUser } from "../store";
+import { useFetchUserQuery, login } from "../store";
 
 export default function ProtectedRoute({ children }) {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export default function ProtectedRoute({ children }) {
 
   let { isLoading, isSuccess, data } = useFetchUserQuery();
   useEffect(() => {
-    if (isSuccess) dispatch(setUser({ user: data, isAuthenticated: true }));
+    if (isSuccess) dispatch(login({ user: data, isAuthenticated: true }));
   }, [isSuccess, data, dispatch]);
 
   if (isLoading) return <Loader loading={isLoading} />;

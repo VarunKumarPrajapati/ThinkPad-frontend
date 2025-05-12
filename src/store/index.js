@@ -13,7 +13,7 @@ import {
   deleteNoteLocal,
   setNoteError,
 } from "./slices/noteSlice";
-import { userReducer, setUser, setAuthenticated } from "./slices/userSlice";
+import { userReducer, login, logout } from "./slices/userSlice";
 
 import notesSyncMiddleware from "./middleware/notesSync";
 
@@ -58,7 +58,7 @@ export {
   setNotes,
   updateNoteLocal,
   deleteNoteLocal,
-  setUser,
-  setAuthenticated,
+  login,
+  logout,
   setNoteError,
 };

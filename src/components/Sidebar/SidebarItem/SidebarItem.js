@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
@@ -9,9 +8,8 @@ function SidebarItem({ label, icon, href, active, className }) {
     <Link to={href} className="w-full">
       <div
         className={twMerge(
-          active ? "bg-active-icon-color" : "bg-white",
-          active ? "" : "hover:bg-gray-100",
-          "flex items-center pl-2.5 justify-left md:gap-x-5 rounded-e-full w-full ",
+          active ? "bg-active-icon-color" : "bg-white hover:bg-gray-100",
+          "flex items-center pl-2.5 justify-left md:gap-x-5 rounded-e-full",
           className
         )}
       >

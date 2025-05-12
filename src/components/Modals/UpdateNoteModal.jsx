@@ -52,8 +52,9 @@ export default function UpdateNoteModal({ note, isOpen, onClose }) {
   };
 
   useEffect(() => {
+    if (!isOpen) return null;
     setData(note);
-  }, [note]);
+  }, [note, isOpen]);
 
   return (
     <Modal

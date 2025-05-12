@@ -14,7 +14,7 @@ export default function Loader({ loading }) {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen bg-slate-900 font-poppins">
-      <Alert isOpen={isOpen} onClose={() => setOpen(false)} duration={7000}>
+      <Alert isOpen={isOpen} onClose={() => setOpen(false)}>
         The backend is hosted on Render.com, so it may take a few moments to
         start. Thank you for your patience.
       </Alert>

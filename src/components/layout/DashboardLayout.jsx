@@ -1,34 +1,33 @@
-import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-import Header from "../components/Header/Header";
-import Sidebar from "../components/Sidebar/Sidebar";
-import CreateNote from "../components/CreateNote/CreateNote";
-import ArchiveNotePage from "./ArchiveNotePage";
-import CommonNotePage from "./CommonNotePage";
+import Header from "./Header";
+import Sidebar from "../Sidebar/Sidebar";
+import CreateNote from "../CreateNote/CreateNote";
+import { UpdateNoteModal } from "../Modals";
 
-import usePropsContext from "../hooks/use-propsContext";
-import { setNoteError } from "../store";
-import { UpdateNoteModal } from "../components/Modals";
+import usePropsContext from "../../hooks/use-propsContext";
+import { setNoteError, setNotes, useFetchNotesQuery } from "../../store";
 
-function MainPage() {
+export default function DashboardLayout() {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const {
-    setIsMobile,
     modalVisibility,
     setModalVisibility,
     selectedNote,
     setSelectedNote,
+    setIsMobile,
   } = usePropsContext();
-  
+
   const handleModalClose = () => {
     setModalVisibility(false);
     setSelectedNote(null);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (window.innerWidth < 768) setIsMobile(true);
 
     const handleResize = () => {
@@ -42,20 +41,26 @@ function MainPage() {
     };
   }, [setIsMobile]);
 
-  const { localNotes, error } = useSelector((state) => state.notes);
+  const { error } = useSelector((state) => state.notes);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (error) {
       toast.error("Something went wrong & rolling back");
       dispatch(setNoteError(null));
     }
   }, [error, dispatch]);
 
+  const { data = [], isSuccess } = useFetchNotesQuery();
+
+  React.useEffect(() => {
+    if (isSuccess) dispatch(setNotes(data));
+  }, [data, isSuccess, dispatch]);
+
   return (
     <div className="flex flex-col w-screen h-screen font-roboto">
       <Header />
       <Sidebar>
-        <CreateNote />
+        {!(pathname === "/search") && <CreateNote />}
         {selectedNote && (
           <UpdateNoteModal
             isOpen={modalVisibility}
@@ -63,16 +68,8 @@ function MainPage() {
             onClose={handleModalClose}
           />
         )}
-        <Routes>
-          <Route path="/" element={<CommonNotePage notes={localNotes} />} />
-          <Route
-            path="/archive"
-            element={<ArchiveNotePage notes={localNotes} />}
-          />
-        </Routes>
+        <Outlet />
       </Sidebar>
     </div>
   );
 }
-
-export default MainPage;

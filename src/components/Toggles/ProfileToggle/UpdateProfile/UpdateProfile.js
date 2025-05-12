@@ -7,7 +7,7 @@ import AvatarList from "./AvatarList/AvatarList";
 
 import { useUpdateUserMutation } from "../../../../store";
 
-function UpdateProfile() {
+function UpdateProfile({ isOpen }) {
   const data = useSelector((state) => state.userState.user);
   const [updateUser, { isLoading }] = useUpdateUserMutation();
   const [username, setUsername] = useState(data?.username);
@@ -22,6 +22,8 @@ function UpdateProfile() {
       updateUser({ username });
     }
   };
+
+  if (!isOpen) return null;
 
   return (
     <>

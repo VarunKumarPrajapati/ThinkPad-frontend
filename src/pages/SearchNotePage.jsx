@@ -16,7 +16,8 @@ export default function SearchNotePage() {
   if (search.query) {
     filteredNotes = localNotes.filter((note) => {
       return (
-        note.title.includes(search.query) || note.content.includes(search.query)
+        note.title?.toLowerCase().includes(search.query.toLowerCase()) ||
+        note.content?.toLowerCase().includes(search.query.toLowerCase())
       );
     });
   }

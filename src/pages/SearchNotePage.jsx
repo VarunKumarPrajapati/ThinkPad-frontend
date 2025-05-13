@@ -1,12 +1,13 @@
+import React from "react";
 import { useSelector } from "react-redux";
 
 import { Box, NoteList } from "../components/ui";
 
 import { usePropsContext } from "../hooks";
-import { useFetchDistinctColorsQuery } from "../store";
+import { useLazyFetchDistinctColorsQuery } from "../store";
 
 export default function SearchNotePage() {
-  const { data } = useFetchDistinctColorsQuery();
+  const [trigger, { data }] = useLazyFetchDistinctColorsQuery();
   const { search, setSearch } = usePropsContext();
   const { localNotes } = useSelector((state) => state.notes);
 
@@ -21,7 +22,7 @@ export default function SearchNotePage() {
   }
 
   if (search.color) {
-    if (!filteredNotes.length) filteredNotes = localNotes;
+    if (!filteredNotes.length && !search.query) filteredNotes = localNotes;
     filteredNotes = filteredNotes.filter((note) => {
       return note.color === search.color;
     });
@@ -31,13 +32,16 @@ export default function SearchNotePage() {
     setSearch((prev) => ({ ...prev, color: data }));
   };
 
+  React.useEffect(() => {
+    trigger();
+  }, [trigger]);
+
   return (
     <div className="w-full h-full px-2 py-4">
-      {filteredNotes.length ? (
-        <NoteList notes={filteredNotes} />
-      ) : (
+      {(search.query || search.color) && !filteredNotes.length && (
         <div className="w-full mt-10 text-center ">No matching results.</div>
       )}
+      <NoteList notes={filteredNotes} />
       <div className="flex flex-col items-center w-full min-h-full ">
         {!(search.query || search.color) && !!data?.length && (
           <Box

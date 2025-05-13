@@ -6,7 +6,7 @@ import { Icon, Input, TextArea } from "../../common";
 import CreateNoteFeatures from "../Features/DesktopCreateNoteFeatures";
 
 import useCreateNoteContext from "../../../hooks/use-createNoteContext";
-import { addNoteLocal } from "../../../store";
+import { addNoteOptimistic } from "../../../store";
 
 function CreateNote() {
   const noteRef = useRef(null);
@@ -37,7 +37,8 @@ function CreateNote() {
     const handleBlur = (e) => {
       if (noteRef.current && !noteRef.current.contains(e.target)) {
         if (note.content.length || note.title.length) {
-          dispatch(addNoteLocal(note));
+          const tempId = `temp-${Date.now()}`;
+          dispatch(addNoteOptimistic({ _id: tempId, ...note }));
         }
 
         setNote({

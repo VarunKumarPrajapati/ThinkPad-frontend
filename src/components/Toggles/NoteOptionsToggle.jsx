@@ -4,14 +4,14 @@ import { MdOutlineMoreVert } from "react-icons/md";
 import { BaseToggle } from "../ui";
 import { Icon } from "../common";
 
-import { deleteNoteLocal } from "../../store";
+import { removeNoteById } from "../../store";
 
 export default function NoteOptionToggle({ note, size = 18 }) {
   const dispatch = useDispatch();
   const list = [
     {
       title: "Delete note",
-      action: () => dispatch(deleteNoteLocal(note._id)),
+      action: () => dispatch(removeNoteById(note._id)),
     },
     // {
     //   title: "Make a copy",

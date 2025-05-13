@@ -8,7 +8,7 @@ import { Pin } from "../Toolbar/ToolbarItem";
 import Toolbar from "../Toolbar/Toolbar";
 
 import { useDebounce } from "../../hooks";
-import { updateNoteLocal } from "../../store";
+import { updateNoteById } from "../../store";
 
 export default function UpdateNoteModal({ note, isOpen, onClose }) {
   const dispatch = useDispatch();
@@ -47,8 +47,8 @@ export default function UpdateNoteModal({ note, isOpen, onClose }) {
   };
 
   const handleSubmit = (data) => {
-    dispatch(updateNoteLocal(data));
-    debounce(() => dispatch(updateNoteLocal({ ...data, sync: true })));
+    dispatch(updateNoteById(data));
+    debounce(() => dispatch(updateNoteById({ ...data, syncFlag: true })));
   };
 
   useEffect(() => {

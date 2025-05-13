@@ -5,7 +5,7 @@ import { toast, Slide } from "react-toastify";
 import { NoteOptionToggle } from "../Toggles";
 import { Archive, ColorPalette, Pin } from "../Toolbar/ToolbarItem";
 
-import { updateNoteLocal } from "../../store";
+import { updateNoteById } from "../../store";
 import { usePropsContext } from "../../hooks";
 
 function Note({ note }) {
@@ -38,7 +38,7 @@ function Note({ note }) {
       ...data,
     };
 
-    dispatch(updateNoteLocal({ ...changes, sync: true }));
+    dispatch(updateNoteById({ ...changes, syncFlag: true }));
   };
 
   const handleNoteClick = () => {

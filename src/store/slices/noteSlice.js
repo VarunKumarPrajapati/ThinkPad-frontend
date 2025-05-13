@@ -14,20 +14,27 @@ const noteSlice = createSlice({
     setNotes(state, action) {
       state.localNotes = action.payload;
     },
-    addNoteLocal(state, action) {
+    addNoteOptimistic(state, action) {
       state.localNotes.unshift(action.payload);
     },
-    updateNoteLocal(state, action) {
-      const { _id, sync, ...data } = action.payload;
+    updateNoteById(state, action) {
+      const { _id, syncFlag, ...payload } = action.payload;
       const index = findIndexById(state.localNotes, _id);
       const note = state.localNotes[index];
-      if (index !== -1) state.localNotes[index] = { ...note, ...data };
-      [state.localNotes[0], state.localNotes[index]] = [
-        state.localNotes[index],
-        state.localNotes[0],
-      ];
+      if (index !== -1) state.localNotes[index] = { ...note, ...payload };
     },
-    deleteNoteLocal(state, action) {
+    removeNoteById(state, action) {
+      const _id = action.payload;
+      const index = findIndexById(state.localNotes, _id);
+      if (index !== -1) state.localNotes.splice(index, 1);
+    },
+    replaceTempIdWithRealId(state, action) {
+      const { tempId, _id } = action.payload;
+      const index = findIndexById(state.localNotes, tempId);
+      const note = state.localNotes[index];
+      if (index !== -1) state.localNotes[index] = { ...note, _id };
+    },
+    rollbackNoteOnError(state, action) {
       const _id = action.payload;
       const index = findIndexById(state.localNotes, _id);
       if (index !== -1) state.localNotes.splice(index, 1);
@@ -81,8 +88,10 @@ const noteSlice = createSlice({
 export const noteReducer = noteSlice.reducer;
 export const {
   setNotes,
-  addNoteLocal,
-  updateNoteLocal,
-  deleteNoteLocal,
+  addNoteOptimistic,
+  updateNoteById,
+  removeNoteById,
+  replaceTempIdWithRealId,
+  rollbackNoteOnError,
   setNoteError,
 } = noteSlice.actions;

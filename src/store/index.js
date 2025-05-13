@@ -7,10 +7,12 @@ import { noteApi } from "./apis/noteApi";
 
 import {
   noteReducer,
-  addNoteLocal,
   setNotes,
-  updateNoteLocal,
-  deleteNoteLocal,
+  addNoteOptimistic,
+  updateNoteById,
+  removeNoteById,
+  replaceTempIdWithRealId,
+  rollbackNoteOnError,
   setNoteError,
 } from "./slices/noteSlice";
 import { userReducer, login, logout } from "./slices/userSlice";
@@ -56,11 +58,13 @@ export {
 
 // Exporting Actions of slices
 export {
-  addNoteLocal,
   setNotes,
-  updateNoteLocal,
-  deleteNoteLocal,
+  addNoteOptimistic,
+  updateNoteById,
+  removeNoteById,
+  replaceTempIdWithRealId,
+  rollbackNoteOnError,
+  setNoteError,
   login,
   logout,
-  setNoteError,
 };

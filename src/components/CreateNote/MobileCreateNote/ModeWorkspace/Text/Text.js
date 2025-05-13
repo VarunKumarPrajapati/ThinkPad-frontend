@@ -6,7 +6,7 @@ import { Archive, Pin, ColorPalette } from "../../../../Toolbar/ToolbarItem";
 
 import useCreateNoteContext from "../../../../../hooks/use-createNoteContext";
 
-import { addNoteLocal } from "../../../../../store";
+import { addNoteOptimistic } from "../../../../../store";
 
 function Text() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function Text() {
 
   const handleSubmit = () => {
     if (note.title.length || note.content.length) {
-      dispatch(addNoteLocal(note));
+      dispatch(addNoteOptimistic(note));
       handleClose();
     }
   };
@@ -55,7 +55,7 @@ function Text() {
         <Input
           name="title"
           placeholder="Title"
-          className="p-0 text-2xl border-0"
+          className="p-0 text-2xl border-0 bg-inherit"
           onChange={handleChange}
         />
         <TextArea

@@ -50,6 +50,8 @@ export {
   useCreateNoteMutation,
   useFetchNotesQuery,
   useUpdateNoteMutation,
+  useLazyFetchDistinctColorsQuery,
+  useFetchDistinctColorsQuery,
 } from "./apis/noteApi";
 
 // Exporting Actions of slices

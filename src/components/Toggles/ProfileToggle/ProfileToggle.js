@@ -11,7 +11,7 @@ import UpdateProfile from "./UpdateProfile/UpdateProfile";
 
 import { useLogoutMutation, logout } from "../../../store";
 
-export default function ProfileToggle() {
+export default function ProfileToggle({ iconClassName, className }) {
   const { user } = useSelector((state) => state.userState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function ProfileToggle() {
   }, [isSuccess, isError, navigate, dispatch]);
 
   const icon = (
-    <button>
+    <button className={iconClassName}>
       <Avatar currentAvatar={user.avatar} className="size-12" />
     </button>
   );

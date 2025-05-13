@@ -8,27 +8,28 @@ export default function BaseToggle({ icon, children, className }) {
   const [alignTop, setAlignTop] = useState(false);
 
   useEffect(() => {
-    if (!isOpen || !buttonRef.current) return;
+    if (!isOpen || !buttonRef.current || !toggleRef.current) return;
 
-    const rect = buttonRef.current.getBoundingClientRect();
+    const buttonRect = buttonRef.current.getBoundingClientRect();
+    const toggleRect = toggleRef.current.getBoundingClientRect();
+
     const sw = window.innerWidth;
     const sh = window.innerHeight;
 
-    const spaceRight = sw - rect.right;
-    const spaceLeft = rect.left;
-    const spaceBottom = sh - rect.bottom;
-    const spaceTop = rect.top;
+    const spaceRight = sw - buttonRect.right;
+    const spaceLeft = buttonRect.left;
+    const spaceBottom = sh - buttonRect.bottom;
+    const spaceTop = buttonRect.top;
 
-    // Assuming toggle is around 240px wide and 160px tall
-    const needW = 240;
-    const needH = 160;
+    const needW = toggleRect.width;
+    const needH = toggleRect.height;
 
     const shouldAlignLeft = spaceRight < needW && spaceLeft >= needW;
     const shouldAlignTop = spaceBottom < needH && spaceTop >= needH;
 
     setAlignLeft(shouldAlignLeft);
     setAlignTop(shouldAlignTop);
-  }, [isOpen, buttonRef]);
+  }, [isOpen, buttonRef, toggleRef]);
 
   return (
     <span className="relative">

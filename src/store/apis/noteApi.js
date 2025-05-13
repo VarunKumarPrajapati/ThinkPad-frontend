@@ -41,6 +41,13 @@ const noteApi = createApi({
           url: `/delete/${_id}`,
         }),
       }),
+
+      fetchDistinctColors: builder.query({
+        query: () => ({
+          method: "GET",
+          url: "/distinct/colors",
+        }),
+      }),
     };
   },
 });
@@ -50,4 +57,6 @@ export const {
   useCreateNoteMutation,
   useFetchNotesQuery,
   useUpdateNoteMutation,
+  useLazyFetchDistinctColorsQuery,
+  useFetchDistinctColorsQuery,
 } = noteApi;

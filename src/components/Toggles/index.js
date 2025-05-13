@@ -1,3 +1,3 @@
-import SettingToggle from "./SettingToggle";
-import NoteOptionToggle from "./NoteOptionsToggle";
-export { SettingToggle, NoteOptionToggle };
+export { default as SettingToggle } from "./SettingToggle";
+export { default as NoteOptionToggle } from "./NoteOptionsToggle";
+export { default as ProfileToggle } from "./ProfileToggle/ProfileToggle";

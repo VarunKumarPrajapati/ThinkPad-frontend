@@ -9,6 +9,7 @@ function PropsProvider({ children }) {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
+  const [search, setSearch] = useState({ query: null, color: null });
   const props = {
     isMobile,
     setIsMobile,
@@ -22,6 +23,8 @@ function PropsProvider({ children }) {
     setModalVisibility,
     selectedNote,
     setSelectedNote,
+    search,
+    setSearch,
   };
 
   return (

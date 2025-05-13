@@ -1,18 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
-import { MdSearch, MdRefresh, MdMenu } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { twMerge } from "tailwind-merge";
+import { MdSearch, MdMenu } from "react-icons/md";
 
 import { Icon } from "../../common";
 
 import { usePropsContext } from "../../../hooks";
-import { useNavigate } from "react-router-dom";
 
 export default function Search() {
   const navigate = useNavigate();
-  const [isFocus, setFocus] = React.useState(false);
-  const { loading } = useSelector((s) => s.notes);
   const sidebarBtnRef = React.useRef(null);
 
   const { setIsSidebarExpanded, setSidebarBtnRef, search, setSearch } =
@@ -24,11 +20,10 @@ export default function Search() {
 
   const handleFocus = () => {
     navigate("/search");
-    setFocus(true);
   };
+
   const handleBlur = () => {
     navigate("/");
-    setFocus(false);
     setSearch({ query: null, color: null });
   };
 
@@ -65,16 +60,6 @@ export default function Search() {
         type="reset"
         onClick={handleBlur}
       />
-
-      {!isFocus && (
-        <Icon
-          icon={MdRefresh}
-          className={twMerge(
-            "hover:text-black hover:bg-transparent md:hidden",
-            loading && "animate-spin"
-          )}
-        />
-      )}
     </div>
   );
 }

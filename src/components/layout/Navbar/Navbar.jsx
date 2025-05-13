@@ -25,10 +25,7 @@ function Navbar() {
 
           <Icon
             icon={MdRefresh}
-            className={twMerge(
-              "hover:text-black hidden md:flex",
-              loading && "animate-spin"
-            )}
+            className={twMerge("hover:text-black ", loading && "animate-spin")}
           />
         </div>
         <ProfileToggle iconClassName="select-none pl-2 md:pr-1 md:pl-8" />

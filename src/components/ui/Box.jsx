@@ -17,7 +17,7 @@ export default function Box({
   });
   return (
     <div
-      className={`min-w-[610px] max-w-[610px] w-12/12 my-4 bg-white shadow-card animate-slide-up ${className}`}
+      className={`md:min-w-[610px] md:max-w-[610px] w-11/12 my-4 bg-white shadow-card animate-slide-up ${className}`}
     >
       <div className="relative flex items-center p-2.5 text-sm ">
         <span className="flex-1 font-medium first-letter:uppercase">
